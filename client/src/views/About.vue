@@ -1,5 +1,18 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+    <default-layout>
+        <div class="home">
+            <p>About</p>
+        </div>
+    </default-layout>
 </template>
+
+<script>
+import DefaultLayout from '@/components/DefaultLayout.vue';
+
+export default {
+    name: 'home',
+    components: {
+        DefaultLayout,
+    },
+};
+</script>
