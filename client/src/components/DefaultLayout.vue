@@ -2,23 +2,35 @@
     <div>
         <header>
             <b-navbar toggleable="lg" type="dark" variant="info">
-                <b-navbar-brand href="/">RoomMate Manager</b-navbar-brand>
+                <b-navbar-brand>
+                    <router-link
+                        class="nav-link"
+                        to="/">
+                            RoomMate Manager
+                        </router-link>
+                </b-navbar-brand>
 
                 <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
                 <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav>
-                    <b-nav-item href="/">Start</b-nav-item>
+                    <b-nav-item>Start</b-nav-item>
                     <b-nav-item-dropdown>
                     <template>
                         Rachunki
                     </template>
-                    <b-dropdown-item href="#">Bierzące
+                    <b-dropdown-item>Bierzące
                     </b-dropdown-item>
-                    <b-dropdown-item href="#">Historia</b-dropdown-item>
+                    <b-dropdown-item>Historia</b-dropdown-item>
                     </b-nav-item-dropdown>
-                    <b-nav-item href="/about">Obowiązki</b-nav-item>
-                    <b-nav-item href="#">To-Do</b-nav-item>
+                    <b-nav-item>
+                        <router-link
+                            class="nav-link"
+                            to="/about">
+                                About
+                        </router-link>
+                    </b-nav-item>
+                    <b-nav-item>To-Do</b-nav-item>
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
