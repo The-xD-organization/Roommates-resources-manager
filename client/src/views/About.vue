@@ -10,7 +10,7 @@
 import DefaultLayout from '@/components/layouts/DefaultLayout.vue';
 
 export default {
-    name: 'home',
+    name: 'about',
     components: {
         DefaultLayout,
     },
