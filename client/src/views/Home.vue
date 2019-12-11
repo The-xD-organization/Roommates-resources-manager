@@ -1,8 +1,20 @@
 <template>
     <default-layout>
-        <div class="home">
-            <p>Strona domowa</p>
-        </div>
+        <b-container fluid class="my-2">
+            <b-row class="justify-content-sm-center">
+                <b-col cols="12 my-1" md="2">
+                    <b-card>
+                    </b-card>
+                </b-col>
+                <b-col cols="12 my-1" md="6">
+                    <b-card></b-card>
+                </b-col>
+                <b-col cols="12 my-1" md="2">
+                    <b-card>
+                    </b-card>
+                </b-col>
+            </b-row>
+        </b-container>
     </default-layout>
 </template>
 
