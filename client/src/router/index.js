@@ -19,6 +19,16 @@ const routes = [
         name: 'login',
         component: () => import('../views/Login.vue'),
     },
+    {
+        path: '/bills',
+        name: 'lobills',
+        component: () => import('../views/Bills.vue'),
+    },
+    {
+        path: '/tasks',
+        name: 'tasks',
+        component: () => import('../views/Tasks.vue'),
+    },
 ];
 
 const router = new VueRouter({
