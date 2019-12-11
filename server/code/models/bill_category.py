@@ -15,7 +15,7 @@ class BillCategoryModel(db.Model):
 
     def json(self):
         return {'name': self.name,
-                'bills': [bill.json() for bill in self.bills.all()]}
+                'bills': [bill.json() for bill in self.bill.all()]}
 
     @classmethod
     def find_by_name(cls, name):

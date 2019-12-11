@@ -27,7 +27,7 @@ class Bill(Resource):
             return bill.json()
         return {'message': 'Bill not found'}, 404
 
-    @jwt_required
+    @jwt_required()
     def post(self, category_id):
         """create one bill of given category for a day"""
         last_bill = BillModel.find_latest_bill(category_id)
@@ -44,13 +44,13 @@ class Bill(Resource):
 
         return bill.json(), 201
 
-    @jwt_required
+    @jwt_required()
     def delete(self):
         pass
 
 
 class BillList(Resource):
-    @jwt_required
+    @jwt_required()
     def get(self):
         """return json of every bill"""
         return {'bills': [bill.json() for bill in BillModel.query.all()]}
