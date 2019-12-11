@@ -42,6 +42,7 @@ export default {
             })
                 .then((response) => {
                     console.log(response);
+                    this.$cookie.set('access_token', response.data.access_token);
                 })
                 .catch((error) => {
                     console.log(error);
