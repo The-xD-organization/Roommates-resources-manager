@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_jwt import JWT
 from flask_restful import Api
+from flask_cors import CORS, cross_origin
 
 from security import authenticate, identity
 from resources.user import UserRegister
@@ -12,6 +13,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    # turns off flask_sqlalchemy modification tracker
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'bart'
+
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 
 # TODO usun przed wrzuceniem na heroku
