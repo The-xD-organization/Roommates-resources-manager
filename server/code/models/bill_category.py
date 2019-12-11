@@ -8,7 +8,7 @@ class BillCategoryModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
 
-    bills = db.relationship('BillModel', lazy='dynamic')
+    bill = db.relationship('BillModel', lazy='dynamic')
 
     def __init__(self, name):
         self.name = name

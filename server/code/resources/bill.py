@@ -2,7 +2,6 @@ from flask_jwt import jwt_required
 from flask_restful import Resource, reqparse
 from models.bill import BillModel, datetime
 
-
 class Bill(Resource):
     """The idea is to pass category_id / bill category in endpoint /bill/<str:category_id>
         and the rest of data in json"""
@@ -32,7 +31,7 @@ class Bill(Resource):
     def post(self, category_id):
         """create one bill of given category for a day"""
         last_bill = BillModel.find_latest_bill(category_id)
-        if last_bill.date == datetime.today():
+        if last_bill.date.day == datetime.today().day:
             return {'message': "Bill of given category with today's date already exists"}, 400
 
         data = Bill.parser.parse_args()

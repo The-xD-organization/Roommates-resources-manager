@@ -8,7 +8,7 @@ class BillModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     usage = db.Column(db.Float(precision=2), nullable=False)
-    date = db.Column(db.DateTime(timezone=False),default=datetime.today)
+    date = db.Column(db.DateTime(timezone=False), default=datetime.today)
     description = db.Column(db.String(100))
 
     category_id = db.Column(db.Integer, db.ForeignKey('bill_categories.id'))
@@ -20,9 +20,10 @@ class BillModel(db.Model):
         self.category_id = category_id
 
     def json(self):
+        date = str(self.date)
         return {'category': self.category_id,
                 'usage': self.usage,
-                'date': self.date,
+                'date': date,
                 'description': self.description
                 }
 
@@ -31,9 +32,9 @@ class BillModel(db.Model):
         return cls.query.filter_by(id=_id).first()
 
     @classmethod
-    def find_latest_bill(cls, _category_id):
+    def find_latest_bill(cls, category_id):
         """returns latest bill of given category (with the most recent date) """
-        return cls.query.filter_by(category_id=_category_id).order_by(cls.date.desc()).first()
+        return cls.query.filter_by(category_id=category_id).order_by(cls.date.desc()).first()
 
     def save_to_db(self):
         """Inserts/update the item to the database"""
