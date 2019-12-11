@@ -20,6 +20,7 @@ class BillModel(db.Model):
         self.category_id = category_id
 
     def json(self):
+        #TODO zwroc id rachunku, co by mozna bylo usuwac dowolny
         date = str(self.date)
         return {'category': self.category_id,
                 'usage': self.usage,
