@@ -54,7 +54,7 @@ class Bill(Resource):
         if bill:
             bill.delete_from_db()
 
-        return {'message' 'Bill deleted'}
+        return {'message': 'Bill deleted'}
 
 
 
