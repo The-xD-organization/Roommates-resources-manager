@@ -30,9 +30,12 @@ class Bill(Resource):
     @jwt_required()
     def post(self, category_id):
         """create one bill of given category for a day"""
-        last_bill = BillModel.find_latest_bill(category_id)
-        if last_bill.date.day == datetime.today().day:
-            return {'message': "Bill of given category with today's date already exists"}, 400
+        if BillModel.find_latest_bill(category_id):
+            """if database is empty, this won't run"""
+            last_bill = BillModel.find_latest_bill(category_id)
+
+            if last_bill.date.day == datetime.today().day:
+                return {'message': "Bill of given category with today's date already exists"}, 400
 
         data = Bill.parser.parse_args()
 
@@ -45,8 +48,15 @@ class Bill(Resource):
         return bill.json(), 201
 
     @jwt_required()
-    def delete(self):
-        pass
+    def delete(self, category_id):
+        """delete latest bill of given category"""
+        bill = BillModel.find_latest_bill(category_id)
+        if bill:
+            bill.delete_from_db()
+
+        return {'message' 'Bill deleted'}
+
+
 
 
 class BillList(Resource):
