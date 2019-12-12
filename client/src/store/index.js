@@ -11,13 +11,10 @@ export default new Vuex.Store({
         errorMesage: null,
     },
     mutations: {
-        AuthenticationStatus(state, payload) {
-            state.isAuthenticated = payload;
-        },
         setLoginStatus(state, payload) {
             state.loginStatus = payload;
         },
-        setErrorMesage(state, payload) {
+        setErrorMessage(state, payload) {
             state.errorMesage = payload;
         },
     },
@@ -29,14 +26,12 @@ export default new Vuex.Store({
                 password: credentials.password,
             })
                 .then((response) => {
-                    commit('AuthenticationStatus', true);
                     Cookies.set('access_token', response.data.access_token);
                     commit('setLoginStatus', 1);
                 })
                 .catch((error) => {
-                    commit('setErrorMesage', error);
+                    commit('setErrorMessage', error);
                     commit('setLoginStatus', -1);
-                    commit('AuthenticationStatus', false);
                 });
         },
     },

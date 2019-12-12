@@ -4,7 +4,7 @@
             <b-row class="my-1">
                  <b-col class="col-sm-9 col-md-7 col-lg-4 mx-auto">
                      <b-card title="Logowanie">
-                        <form>
+                        <form @keydown.enter="login()">
                             <!-- nie wiem czego dokladnie uzywasz wiec dalem p
                                 ale zrob tak zeby to bylo ladne kolorwe itp-->
                             <p v-if="loginStatus === -1">
@@ -12,6 +12,9 @@
                             </p>
                             <p v-if="loginStatus === 0">
                                 Logowanie...
+                            </p>
+                            <p v-if="inputErrors !== null">
+                                {{ inputErrors }}
                             </p>
                             <b-col class="my-2">
                             <b-form-input
@@ -27,7 +30,12 @@
                                 placeholder="Wpisz hasło"
                             ></b-form-input>
                             </b-col>
-                            <b-button @click="login()" variant="primary">Zaloguj się</b-button>
+                            <b-button
+                                @click="login()"
+                                variant="primary"
+                            >
+                                Zaloguj się
+                            </b-button>
                         </form>
                      </b-card>
                  </b-col>
@@ -51,11 +59,21 @@ export default {
                 username: '',
                 password: '',
             },
+            inputErrors: null,
         };
     },
     methods: {
         login() {
-            this.$store.dispatch('login', this.credentials);
+            if (this.credentials.username === '' && this.credentials.password === '') {
+                this.inputErrors = 'Podaj nazwę użytkownika i hasło';
+            } else if (this.credentials.username === '') {
+                this.inputErrors = 'Podaj nazwę użytkownika';
+            } else if (this.credentials.password === '') {
+                this.inputErrors = 'Podaj hasło';
+            } else {
+                this.inputErrors = '';
+                this.$store.dispatch('login', this.credentials);
+            }
         },
     },
     computed: {
