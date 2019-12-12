@@ -34,6 +34,9 @@ export default new Vuex.Store({
                     commit('setLoginStatus', -1);
                 });
         },
+        logout() {
+            Cookies.remove('access_token');
+        },
     },
     modules: {
     },
