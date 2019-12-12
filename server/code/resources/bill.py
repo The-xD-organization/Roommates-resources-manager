@@ -1,4 +1,4 @@
-from flask_jwt import jwt_required
+from flask_jwt_extended import jwt_required
 from flask_restful import Resource, reqparse
 from models.bill import BillModel, datetime
 
@@ -19,7 +19,7 @@ class Bill(Resource):
                         required=True,
                         help="This field cannot be left blank!")
 
-    @jwt_required()
+    @jwt_required
     def get(self, category_id):
         """returns latest bill of given category"""
         try:
@@ -31,7 +31,7 @@ class Bill(Resource):
             return bill.json()
         return {'message': 'Bill not found'}, 404
 
-    @jwt_required()
+    @jwt_required
     def post(self, category_id):
         """create one bill of given category for a day"""
         if BillModel.find_latest_bill(category_id):
@@ -51,7 +51,7 @@ class Bill(Resource):
 
         return bill.json(), 201
 
-    @jwt_required()
+    @jwt_required
     def delete(self, category_id):
         """delete latest bill of given category"""
         bill = BillModel.find_latest_bill(category_id)
@@ -62,7 +62,7 @@ class Bill(Resource):
 
 
 class BillList(Resource):
-    @jwt_required()
+    @jwt_required
     def get(self):
         """return json of every bill"""
         return {'bills': [bill.json() for bill in BillModel.find_all()]}
