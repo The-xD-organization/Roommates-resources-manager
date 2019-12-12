@@ -3,9 +3,9 @@
         <b-container fluid>
             <b-row class="my-1">
                  <b-col class="col-sm-9 col-md-7 col-lg-4 mx-auto">
-                    <h3>Zostałeś wylogowany.</h3>
+                    <h3>Wylogowaliśmy Cię</h3>
                     <router-link to="/">
-                            Powrót do strony głownej
+                            Wróć do strony głownej
                         </router-link>
                  </b-col>
             </b-row>

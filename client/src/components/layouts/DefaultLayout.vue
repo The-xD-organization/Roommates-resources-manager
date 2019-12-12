@@ -50,7 +50,7 @@
                     </template>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
                     <!-- trzeba inną klasę ustawić żeby nie było białe -->
-                    <b-dropdown-item href="#"><router-link
+                    <b-dropdown-item><router-link
                             class="nav-link"
                             to="/logout">
                                 Wyloguj
