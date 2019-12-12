@@ -15,12 +15,10 @@
                 </b-col>
             </b-row>
         </b-container>
-        <button @click="testAuth()">Test Auth</button>
     </default-layout>
 </template>
 
 <script>
-import axios from 'axios';
 import DefaultLayout from '@/components/layouts/DefaultLayout.vue';
 
 
@@ -35,19 +33,6 @@ export default {
     },
 
     methods: {
-        testAuth() {
-            axios.post(`${process.env.VUE_APP_API_URL}/auth`, {
-                username: 'bob',
-                password: '1234',
-            })
-                .then((response) => {
-                    console.log(response);
-                    this.$cookie.set('access_token', response.data.access_token);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
     },
 };
 </script>

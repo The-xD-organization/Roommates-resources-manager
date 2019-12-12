@@ -6,12 +6,20 @@
                      <b-card title="Logowanie">
                         <form>
                             <b-col class="my-2">
-                            <b-form-input type="email" placeholder="Wpisz e-mail"></b-form-input>
+                            <b-form-input
+                                v-model="credentials.username"
+                                type="email"
+                                placeholder="Wpisz e-mail"
+                            ></b-form-input>
                             </b-col>
                             <b-col class="my-2">
-                            <b-form-input type="password" placeholder="Wpisz hasło"></b-form-input>
+                            <b-form-input
+                                v-model="credentials.password"
+                                type="password"
+                                placeholder="Wpisz hasło"
+                            ></b-form-input>
                             </b-col>
-                            <b-button type="submit" variant="primary">Zaloguj się</b-button>
+                            <b-button @click="login()" variant="primary">Zaloguj się</b-button>
                         </form>
                      </b-card>
                  </b-col>
@@ -21,12 +29,29 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import LoginLayout from '@/components/layouts/LoginLayout.vue';
 
 export default {
     name: 'login',
     components: {
         LoginLayout,
+    },
+    data() {
+        return {
+            credentials: {
+                username: '',
+                password: '',
+            },
+        };
+    },
+    methods: {
+        login() {
+            this.$store.dispatch('login', this.credentials);
+        },
+    },
+    mounted() {
+        if (Cookies.get('access_token') !== undefined) this.$router.replace('/');
     },
 };
 </script>
