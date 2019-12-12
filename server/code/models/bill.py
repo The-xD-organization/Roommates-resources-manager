@@ -9,13 +9,15 @@ class BillModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usage = db.Column(db.Float(precision=2), nullable=False)
     date = db.Column(db.DateTime(timezone=False), default=datetime.today)
+    cash = db.Column(db.Float(precision=2), default=0)
     description = db.Column(db.String(100))
 
     category_id = db.Column(db.Integer, db.ForeignKey('bill_categories.id'))
     category = db.relationship('BillCategoryModel')
 
-    def __init__(self, usage, description, category_id):
+    def __init__(self, usage, cash, description, category_id):
         self.usage = usage
+        self.cash = cash
         self.description = description
         self.category_id = category_id
 
@@ -25,6 +27,7 @@ class BillModel(db.Model):
         return {'id': self.id,
                 'category': self.category_id,
                 'usage': self.usage,
+                'cash': self.cash,
                 'date': date,
                 'description': self.description
                 }
