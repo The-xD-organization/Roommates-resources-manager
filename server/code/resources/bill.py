@@ -65,6 +65,6 @@ class BillList(Resource):
     @jwt_required()
     def get(self):
         """return json of every bill"""
-        return {'bills': [bill.json() for bill in BillModel.query.all()]}
+        return {'bills': [bill.json() for bill in BillModel.find_all()]}
 
 

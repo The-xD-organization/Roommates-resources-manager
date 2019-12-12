@@ -25,7 +25,7 @@ class BillModel(db.Model):
         #TODO zwroc id rachunku, co by mozna bylo usuwac dowolny
         date = str(self.date)
         return {'id': self.id,
-                'category': self.category_id,
+                'category_id': self.category_id,
                 'usage': self.usage,
                 'cash': self.cash,
                 'date': date,
@@ -35,6 +35,10 @@ class BillModel(db.Model):
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
 
     @classmethod
     def find_latest_bill(cls, category_id):
