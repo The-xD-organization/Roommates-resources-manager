@@ -49,7 +49,12 @@
                         <em>Konto</em>
                     </template>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                    <!-- trzeba inną klasę ustawić żeby nie było białe -->
+                    <b-dropdown-item><router-link
+                            class="nav-link"
+                            to="/logout">
+                                Wyloguj
+                        </router-link></b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
                 </b-collapse>

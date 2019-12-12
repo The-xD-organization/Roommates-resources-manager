@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Cookies from 'js-cookie';
 
 Vue.use(VueRouter);
 
@@ -20,8 +21,13 @@ const routes = [
         component: () => import('../views/Login.vue'),
     },
     {
+        path: '/logout',
+        name: 'logout',
+        component: () => import('../views/Logout.vue'),
+    },
+    {
         path: '/bills',
-        name: 'lobills',
+        name: 'bills',
         component: () => import('../views/Bills.vue'),
     },
     {
@@ -37,4 +43,10 @@ const router = new VueRouter({
     routes,
 });
 
+router.beforeEach((to, from, next) => {
+    const publicPages = ['/login'];
+    const authRequired = !publicPages.includes(to.path);
+    if (authRequired && Cookies.get('access_token') === undefined) next('/login');
+    else next();
+});
 export default router;

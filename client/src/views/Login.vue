@@ -4,14 +4,38 @@
             <b-row class="my-1">
                  <b-col class="col-sm-9 col-md-7 col-lg-4 mx-auto">
                      <b-card title="Logowanie">
-                        <form>
+                        <form @keydown.enter="login()">
+                            <!-- nie wiem czego dokladnie uzywasz wiec dalem p
+                                ale zrob tak zeby to bylo ladne kolorwe itp-->
+                            <p v-if="loginStatus === -1">
+                                Błąd logowania<br> {{ $store.state.errorMesage }}
+                            </p>
+                            <p v-if="loginStatus === 0">
+                                Logowanie...
+                            </p>
+                            <p v-if="inputErrors !== null">
+                                {{ inputErrors }}
+                            </p>
                             <b-col class="my-2">
-                            <b-form-input type="email" placeholder="Wpisz e-mail"></b-form-input>
+                            <b-form-input
+                                v-model="credentials.username"
+                                type="email"
+                                placeholder="Wpisz e-mail"
+                            ></b-form-input>
                             </b-col>
                             <b-col class="my-2">
-                            <b-form-input type="password" placeholder="Wpisz hasło"></b-form-input>
+                            <b-form-input
+                                v-model="credentials.password"
+                                type="password"
+                                placeholder="Wpisz hasło"
+                            ></b-form-input>
                             </b-col>
-                            <b-button type="submit" variant="primary">Zaloguj się</b-button>
+                            <b-button
+                                @click="login()"
+                                variant="primary"
+                            >
+                                Zaloguj się
+                            </b-button>
                         </form>
                      </b-card>
                  </b-col>
@@ -21,12 +45,49 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import LoginLayout from '@/components/layouts/LoginLayout.vue';
 
 export default {
     name: 'login',
     components: {
         LoginLayout,
+    },
+    data() {
+        return {
+            credentials: {
+                username: '',
+                password: '',
+            },
+            inputErrors: null,
+        };
+    },
+    methods: {
+        login() {
+            if (this.credentials.username === '' && this.credentials.password === '') {
+                this.inputErrors = 'Podaj nazwę użytkownika i hasło';
+            } else if (this.credentials.username === '') {
+                this.inputErrors = 'Podaj nazwę użytkownika';
+            } else if (this.credentials.password === '') {
+                this.inputErrors = 'Podaj hasło';
+            } else {
+                this.inputErrors = '';
+                this.$store.dispatch('login', this.credentials);
+            }
+        },
+    },
+    computed: {
+        loginStatus() {
+            return this.$store.state.loginStatus;
+        },
+    },
+    watch: {
+        loginStatus(newValue) {
+            if (newValue === 1) this.$router.replace('/');
+        },
+    },
+    mounted() {
+        if (Cookies.get('access_token') !== undefined) this.$router.replace('/');
     },
 };
 </script>
