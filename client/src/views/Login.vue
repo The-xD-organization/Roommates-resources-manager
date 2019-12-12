@@ -5,6 +5,14 @@
                  <b-col class="col-sm-9 col-md-7 col-lg-4 mx-auto">
                      <b-card title="Logowanie">
                         <form>
+                            <!-- nie wiem czego dokladnie uzywasz wiec dalem p
+                                ale zrob tak zeby to bylo ladne kolorwe itp-->
+                            <p v-if="loginStatus === -1">
+                                Błąd logowania<br> {{ $store.state.errorMesage }}
+                            </p>
+                            <p v-if="loginStatus === 0">
+                                Logowanie...
+                            </p>
                             <b-col class="my-2">
                             <b-form-input
                                 v-model="credentials.username"
@@ -48,6 +56,16 @@ export default {
     methods: {
         login() {
             this.$store.dispatch('login', this.credentials);
+        },
+    },
+    computed: {
+        loginStatus() {
+            return this.$store.state.loginStatus;
+        },
+    },
+    watch: {
+        loginStatus(newValue) {
+            if (newValue === 1) this.$router.replace('/');
         },
     },
     mounted() {
