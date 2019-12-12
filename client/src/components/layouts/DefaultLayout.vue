@@ -19,13 +19,17 @@
                             to="/">
                                 Start
                         </router-link></b-nav-item>
-                    <b-nav-item-dropdown text="Rachunki">
-                    <b-dropdown-item>Bierzące</b-dropdown-item>
+                    <b-nav-item-dropdown text="Rachunki" right class="py-2">
+                    <b-dropdown-item><router-link
+                            class="link"
+                            to="/bills">
+                                Bieżące
+                        </router-link></b-dropdown-item>
                     <b-dropdown-item>Historia</b-dropdown-item>
                     </b-nav-item-dropdown>
                     <b-nav-item><router-link
                             class="nav-link"
-                            to="/login">
+                            to="/tasks">
                                 Obowiązki
                         </router-link></b-nav-item>
                     <b-nav-item>
@@ -38,20 +42,14 @@
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-form class="mx-auto">
-                    <b-form-input size="sm" class="col-9 mx-auto mr-sm-1" placeholder="Szukaj">
-                    </b-form-input>
-                    <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
-                    </b-nav-form>
 
                     <b-nav-item-dropdown right>
                     <template v-slot:button-content>
                         <em>Konto</em>
                     </template>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <!-- trzeba inną klasę ustawić żeby nie było białe -->
                     <b-dropdown-item><router-link
-                            class="nav-link"
+                            class="link"
                             to="/logout">
                                 Wyloguj
                         </router-link></b-dropdown-item>
