@@ -11,6 +11,7 @@ export default new Vuex.Store({
         errorMesage: null,
         getBillStatus: null,
         billsList: null,
+        addNewBillStatus: null,
     },
     mutations: {
         setLoginStatus(state, payload) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
         },
         setBillsList(state, payload) {
             state.billsList = payload;
+        },
+        setAddNewBillStatus(state, payload) {
+            state.addNewBillStatus = payload;
         },
     },
     actions: {
@@ -56,7 +60,27 @@ export default new Vuex.Store({
                 })
                 .catch((error) => {
                     commit('setErrorMessage', error);
-
+                    commit('setGetBillStatus', -1);
+                });
+        },
+        addNewBill({ commit }, billData) {
+            commit('setAddNewBillStatus', 0);
+            axios.post(`${process.env.VUE_APP_API_URL}/bill/${billData.category}`, {
+                description: billData.description,
+                usage: billData.usage,
+                cash: billData.cash,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setAddNewBillStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
                     commit('setGetBillStatus', -1);
                 });
         },
