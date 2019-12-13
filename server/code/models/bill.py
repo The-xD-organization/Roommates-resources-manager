@@ -7,22 +7,27 @@ class BillModel(db.Model):
     __tablename__ = 'bills'
 
     id = db.Column(db.Integer, primary_key=True)
-    usage = db.Column(db.Float(precision=2), nullable=False)
+    usage = db.Column(db.Float(precision=2), default=0)
     date = db.Column(db.DateTime(timezone=False), default=datetime.today)
+    cash = db.Column(db.Float(precision=2), default=0)
     description = db.Column(db.String(100))
 
     category_id = db.Column(db.Integer, db.ForeignKey('bill_categories.id'))
     category = db.relationship('BillCategoryModel')
 
-    def __init__(self, usage, description, category_id):
+    def __init__(self, usage, cash, description, category_id):
         self.usage = usage
+        self.cash = cash
         self.description = description
         self.category_id = category_id
 
     def json(self):
+        #TODO zwroc id rachunku, co by mozna bylo usuwac dowolny
         date = str(self.date)
-        return {'category': self.category_id,
+        return {'id': self.id,
+                'category_id': self.category_id,
                 'usage': self.usage,
+                'cash': self.cash,
                 'date': date,
                 'description': self.description
                 }
@@ -30,6 +35,10 @@ class BillModel(db.Model):
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
 
     @classmethod
     def find_latest_bill(cls, category_id):
