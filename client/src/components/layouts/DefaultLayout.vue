@@ -22,14 +22,11 @@
                             to="/">
                                 Start
                         </router-link></b-nav-item>
-                    <b-nav-item-dropdown text="Rachunki" right class="py-2">
-                    <b-dropdown-item><router-link
-                            class="link"
+                         <b-nav-item><router-link
+                            class="nav-link"
                             to="/bills">
-                                Bieżące
-                        </router-link></b-dropdown-item>
-                    <b-dropdown-item>Historia</b-dropdown-item>
-                    </b-nav-item-dropdown>
+                                Rachunki
+                        </router-link></b-nav-item>
                     <b-nav-item><router-link
                             class="nav-link"
                             to="/tasks">
