@@ -35,8 +35,8 @@ export default {
         return {
             billData: {
                 category: '',
-                usage: '',
-                cash: '',
+                usage: null,
+                cash: null,
                 description: '',
             },
         };
