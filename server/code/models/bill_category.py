@@ -13,10 +13,14 @@ class BillCategoryModel(db.Model):
     def __init__(self, name):
         self.name = name
 
-    def json(self):
+    def json(self, extended=True):
+        if extended:
+            return {'id': self.id,
+                    'name': self.name,
+                    'bills': [bill.json() for bill in self.bill.all()]}
         return {'id': self.id,
-                'name': self.name,
-                'bills': [bill.json() for bill in self.bill.all()]}
+                'name': self.name}
+
 
     @classmethod
     def find_by_name(cls, name):
