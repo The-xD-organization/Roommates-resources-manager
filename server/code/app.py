@@ -4,6 +4,7 @@ from flask import Flask
 from flask_jwt import JWT
 from flask_restful import Api
 from flask_cors import CORS
+from datetime import timedelta
 
 from security import authenticate, identity
 from resources.user import UserRegister, User
@@ -27,6 +28,9 @@ api = Api(app)
 
 
 jwt = JWT(app, authenticate, identity)  # creates /auth endpoint
+
+app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)     # change later
+
 
 api.add_resource(BillCategory, '/bill_category/<string:name>')
 api.add_resource(Bill, '/bill/<int:category_id>')
