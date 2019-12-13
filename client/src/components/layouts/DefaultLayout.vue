@@ -1,5 +1,8 @@
 <template>
     <div>
+        <body>
+            <section>
+                <div class="wrapper">
         <header>
             <b-navbar toggleable="lg" type="dark" variant="info">
                 <b-navbar-brand>
@@ -19,13 +22,17 @@
                             to="/">
                                 Start
                         </router-link></b-nav-item>
-                    <b-nav-item-dropdown text="Rachunki">
-                    <b-dropdown-item>Bierzące</b-dropdown-item>
+                    <b-nav-item-dropdown text="Rachunki" right class="py-2">
+                    <b-dropdown-item><router-link
+                            class="link"
+                            to="/bills">
+                                Bieżące
+                        </router-link></b-dropdown-item>
                     <b-dropdown-item>Historia</b-dropdown-item>
                     </b-nav-item-dropdown>
                     <b-nav-item><router-link
                             class="nav-link"
-                            to="/login">
+                            to="/tasks">
                                 Obowiązki
                         </router-link></b-nav-item>
                     <b-nav-item>
@@ -38,20 +45,14 @@
                 </b-navbar-nav>
 
                 <b-navbar-nav class="ml-auto">
-                    <b-nav-form class="mx-auto">
-                    <b-form-input size="sm" class="col-9 mx-auto mr-sm-1" placeholder="Szukaj">
-                    </b-form-input>
-                    <b-button size="sm" class="my-2 my-sm-0" type="submit">Szukaj</b-button>
-                    </b-nav-form>
 
                     <b-nav-item-dropdown right>
                     <template v-slot:button-content>
                         <em>Konto</em>
                     </template>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <!-- trzeba inną klasę ustawić żeby nie było białe -->
                     <b-dropdown-item><router-link
-                            class="nav-link"
+                            class="link"
                             to="/logout">
                                 Wyloguj
                         </router-link></b-dropdown-item>
@@ -60,8 +61,22 @@
                 </b-collapse>
             </b-navbar>
         </header>
-
+        <main>
         <slot></slot>
+        </main>
+
+        <footer class="footer">
+        <b-container fluid>
+            <b-row class="text-center">
+                <b-col>
+                    <span class="text-white">Copyright © The-xD-organization</span>
+                </b-col>
+            </b-row>
+        </b-container>
+        </footer>
+                </div>
+            </section>
+        </body>
     </div>
 </template>
 
@@ -72,5 +87,26 @@ export default {
 </script>
 
 <style scoped>
+body{
+    padding: 0;
+    margin: 0;
+}
+*{
+    box-sizing: border-box;
+}
+section {
+height: 100vh;
+}
+.wrapper {
+min-height: 100%;
+display: grid;
+grid-template-rows: auto 1fr auto;
+}
+.footer{
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #17a2b8;
+}
 
 </style>
