@@ -1,6 +1,8 @@
 <template>
     <default-layout>
-        <div>
+        <b-container class="my-2">
+            <b-row>
+                <b-col>
             <div class="pageMenu">
                 <h2>Rachunki</h2>
                 <button
@@ -22,7 +24,9 @@
             <AddBill
                 v-if="mode==1"
             />
-        </div>
+                </b-col>
+            </b-row>
+        </b-container>
     </default-layout>
 </template>
 
