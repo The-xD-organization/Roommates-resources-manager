@@ -28,7 +28,7 @@ class BillModel(db.Model):
                 'category_id': self.category_id,
                 'usage': self.usage,
                 'cash': self.cash,
-                'date': date,
+                'date': date[:10],
                 'description': self.description
                 }
 

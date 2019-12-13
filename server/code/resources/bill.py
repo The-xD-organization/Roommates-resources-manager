@@ -34,12 +34,13 @@ class Bill(Resource):
     @jwt_required()
     def post(self, category_id):
         """create one bill of given category for a day"""
-        if BillModel.find_latest_bill(category_id):
-            """if database is empty, this won't run"""
-            last_bill = BillModel.find_latest_bill(category_id)
-
-            if last_bill.date.day == datetime.today().day:
-                return {'message': "Bill of given category with today's date already exists"}, 400
+        # TODO uncomment in production, FOR TEST ONLY
+        # if BillModel.find_latest_bill(category_id):
+        #     """if database is empty, this won't run"""
+        #     last_bill = BillModel.find_latest_bill(category_id)
+        #
+        #     if last_bill.date.day == datetime.today().day:
+        #         return {'message': "Bill of given category with today's date already exists"}, 400
 
         data = Bill.parser.parse_args()
 
