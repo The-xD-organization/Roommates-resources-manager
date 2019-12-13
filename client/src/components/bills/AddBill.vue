@@ -25,6 +25,9 @@
                 Wyślij
             </b-button>
         </form>
+        <p v-if="$store.state.addNewBillStatus === 0">Wysyłanie...</p>
+        <p v-else-if="$store.state.addNewBillStatus === 1">Wysłano</p>
+        <p v-else-if="$store.state.addNewBillStatus === -1">Wysyłanie nie powiodło się</p>
     </div>
 </template>
 
@@ -41,7 +44,8 @@ export default {
             },
         };
     },
-    mounted() {
+    beforeDestroy() {
+        this.$store.commit('setAddNewBillStatus', null);
     },
     methods: {
         sendBill() {
