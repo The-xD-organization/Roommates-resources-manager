@@ -8,8 +8,12 @@ class Bill(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('usage',
                         type=float,
-                        required=True,
+                        required=False,
                         help="This field cannot be left blank!")
+    parser.add_argument('cash',
+                        type=float,
+                        required=False
+                        )
     parser.add_argument('description',
                         type=str,
                         required=True,
@@ -30,16 +34,17 @@ class Bill(Resource):
     @jwt_required()
     def post(self, category_id):
         """create one bill of given category for a day"""
-        if BillModel.find_latest_bill(category_id):
-            """if database is empty, this won't run"""
-            last_bill = BillModel.find_latest_bill(category_id)
-
-            if last_bill.date.day == datetime.today().day:
-                return {'message': "Bill of given category with today's date already exists"}, 400
+        # TODO uncomment in production, FOR TEST ONLY
+        # if BillModel.find_latest_bill(category_id):
+        #     """if database is empty, this won't run"""
+        #     last_bill = BillModel.find_latest_bill(category_id)
+        #
+        #     if last_bill.date.day == datetime.today().day:
+        #         return {'message': "Bill of given category with today's date already exists"}, 400
 
         data = Bill.parser.parse_args()
 
-        bill = BillModel(data['usage'], data['description'], category_id)
+        bill = BillModel(data['usage'], data['cash'], data['description'], category_id)
         try:
             bill.save_to_db()
         except:
@@ -57,10 +62,10 @@ class Bill(Resource):
         return {'message': 'Bill deleted'}
 
 
-
-
 class BillList(Resource):
     @jwt_required()
     def get(self):
         """return json of every bill"""
-        return {'bills': [bill.json() for bill in BillModel.query.all()]}
+        return {'bills': [bill.json() for bill in BillModel.find_all()]}
+
+

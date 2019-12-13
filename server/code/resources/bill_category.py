@@ -7,11 +7,11 @@ class BillCategory(Resource):
     def get(self, name):
         bill_category = BillCategoryModel.find_by_name(name)
         if bill_category:
-            return bill_category.json()
+            return bill_category.json(extended=True)
         return {'message': 'Bill category not found.'}, 404
 
 
 class BillCategoryList(Resource):
     @jwt_required()
     def get(self):
-        return {'bill categories': [bill_category.json() for bill_category in BillCategoryModel.query.all()]}
+        return {'bill categories': [x.json(extended=False) for x in BillCategoryModel.find_all()]}
