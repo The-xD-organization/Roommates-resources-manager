@@ -3,10 +3,11 @@ import os
 from flask import Flask
 from flask_jwt import JWT
 from flask_restful import Api
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
+from datetime import timedelta
 
 from security import authenticate, identity
-from resources.user import UserRegister
+from resources.user import UserRegister, User
 from resources.bill import Bill, BillList
 from resources.bill_category import BillCategory, BillCategoryList
 
@@ -28,11 +29,15 @@ api = Api(app)
 
 jwt = JWT(app, authenticate, identity)  # creates /auth endpoint
 
+app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)     # change later
+
+
 api.add_resource(BillCategory, '/bill_category/<string:name>')
 api.add_resource(Bill, '/bill/<int:category_id>')
 api.add_resource(BillList, '/bills')
 api.add_resource(BillCategoryList, '/bill_categories')
 api.add_resource(UserRegister, '/register')
+api.add_resource(User, '/user/<int:user_id>')
 
 # if it's not __main__, it means we have imported this file (don't run the app then)
 if __name__ == '__main__':
