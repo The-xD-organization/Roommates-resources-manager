@@ -65,7 +65,8 @@ export default new Vuex.Store({
         },
         addNewBill({ commit }, billData) {
             commit('setAddNewBillStatus', 0);
-            axios.post(`${process.env.VUE_APP_API_URL}/bill/${billData.category}`, {
+            axios.post(`${process.env.VUE_APP_API_URL}/bill`, {
+                category_id: billData.category,
                 description: billData.description,
                 usage: billData.usage,
                 cash: billData.cash,
