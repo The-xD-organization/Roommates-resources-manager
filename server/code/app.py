@@ -33,7 +33,7 @@ app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)     # change later
 
 
 api.add_resource(BillCategory, '/bill_category/<string:name>')
-api.add_resource(Bill, '/bill/<int:category_id>')
+api.add_resource(Bill, '/bill', '/bill/<int:bill_id>')
 api.add_resource(BillList, '/bills')
 api.add_resource(BillCategoryList, '/bill_categories')
 api.add_resource(UserRegister, '/register')
