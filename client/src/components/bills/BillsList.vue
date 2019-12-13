@@ -3,7 +3,7 @@
         <!-- To trzeba ladnie zrobic -->
         <p v-if="$store.state.getBillStatus == 0">Ładownie...</p>
         <p v-if="$store.state.getBillStatus == -1">Błąd ładowania</p>
-        <div v-for = "bill in $store.state.billsList" :key = bill.id>
+        <div v-for="bill in $store.state.billsList" :key = bill.id>
             <p>Nazwa kategorii: {{ bill.category_id }}</p>
             <p v-show="bill.usage != 0">Zużycie: {{ bill.usage }}</p>
             <p v-show="bill.cash != 0">Koszt: {{ bill.cash }}</p>
