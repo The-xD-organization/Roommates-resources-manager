@@ -7,7 +7,7 @@ class BillModel(db.Model):
     __tablename__ = 'bills'
 
     id = db.Column(db.Integer, primary_key=True)
-    usage = db.Column(db.Float(precision=2), nullable=False)
+    usage = db.Column(db.Float(precision=2), default=0)
     date = db.Column(db.DateTime(timezone=False), default=datetime.today)
     cash = db.Column(db.Float(precision=2), default=0)
     description = db.Column(db.String(100))

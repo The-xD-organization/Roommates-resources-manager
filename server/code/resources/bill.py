@@ -8,7 +8,7 @@ class Bill(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('usage',
                         type=float,
-                        required=True,
+                        required=False,
                         help="This field cannot be left blank!")
     parser.add_argument('cash',
                         type=float,
