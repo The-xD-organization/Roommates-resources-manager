@@ -1,5 +1,8 @@
 <template>
     <div>
+        <body>
+            <section>
+                <div class="wrapper">
         <header>
             <b-navbar toggleable="lg" type="dark" variant="info">
                 <b-navbar-brand>
@@ -58,8 +61,22 @@
                 </b-collapse>
             </b-navbar>
         </header>
-
+        <main>
         <slot></slot>
+        </main>
+
+        <footer class="footer">
+        <b-container fluid>
+            <b-row class="text-center">
+                <b-col>
+                    <span class="text-white">Copyright © The-xD-organization</span>
+                </b-col>
+            </b-row>
+        </b-container>
+        </footer>
+                </div>
+            </section>
+        </body>
     </div>
 </template>
 
@@ -70,5 +87,26 @@ export default {
 </script>
 
 <style scoped>
+body{
+    padding: 0;
+    margin: 0;
+}
+*{
+    box-sizing: border-box;
+}
+section {
+height: 100vh;
+}
+.wrapper {
+min-height: 100%;
+display: grid;
+grid-template-rows: auto 1fr auto;
+}
+.footer{
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #17a2b8;
+}
 
 </style>
