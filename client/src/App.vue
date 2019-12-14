@@ -22,13 +22,4 @@
 #nav a.router-link-exact-active {
     color: #42b983;
 }
-.pageMenu{
-    background-color: #3b4252;
-}
-.pageMenu h2, button{
-    display: inline-block;
-}
-.pageMenu h2{
-    color: white;
-}
 </style>

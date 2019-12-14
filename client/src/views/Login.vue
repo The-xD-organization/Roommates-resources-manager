@@ -174,10 +174,10 @@ export default {
     overflow: hidden;
 }
 .footer{
- position: absolute;;
- bottom: 0;
- width: 100%;
- height: 40px;
+    position: absolute;;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
 }
 .logo-container{
     margin-bottom: 35px;
