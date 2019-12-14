@@ -16,6 +16,13 @@
             <div class="container">
                 <div class="col-lg-5 ml-auto mr-auto">
                         <b-card class="login">
+                        <div class="">
+                            <div class="logo-container">
+                                <b-img class="image" alt="Logo"
+                                 src="https://image.flaticon.com/user_icons/18063/18063151/1576325119849.svg">
+                                </b-img>
+                            </div>
+                        </div>
                             <form @keydown.enter="login()">
                                 <!-- nie wiem czego dokladnie uzywasz wiec dalem p
                                     ale zrob tak zeby to bylo ladne kolorwe itp-->
@@ -122,7 +129,7 @@ export default {
     padding-top:20px;
 }
 .content{
-    margin-top: 12%;
+    margin-top: 8%;
 }
 .container{
     height: 100%;
@@ -171,5 +178,13 @@ export default {
  bottom: 0;
  width: 100%;
  height: 40px;
+}
+.logo-container{
+    margin-bottom: 35px;
+    background: transparent;
+}
+.image{
+    max-height: 128px;
+    position: relative;
 }
 </style>
