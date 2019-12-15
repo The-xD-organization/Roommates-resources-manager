@@ -1,6 +1,6 @@
 <template>
     <login-layout>
-        <body class="login-page">
+        <body>
             <div class="page-header clear-filter">
             <b-navbar  class="navbar-transparent" type="dark" toggleable="lg">
                 <b-navbar-brand>
@@ -16,7 +16,7 @@
             <div class="container">
                 <div class="col-lg-5 ml-auto mr-auto">
                         <b-card class="login">
-                        <div class="">
+                        <div>
                             <div class="logo-container">
                                 <b-img class="image" alt="Logo"
                                  src="https://image.flaticon.com/user_icons/18063/18063151/1576325119849.svg">
