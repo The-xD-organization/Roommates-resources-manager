@@ -1,26 +1,30 @@
 <template>
-    <div>
+    <b-container class="bill-form">
+        <b-row align-h="center">
+            <b-col>
+        <b-card title="Dodaj rachunek"
+        border-variant="info">
         <form>
             <!-- Kategorie zmienię na fajnego selecta -->
-            <b-form-input
+            <b-form-input class="my-2 form-style"
                 v-model="billData.category"
                 placeholder="Kategoria"
             ></b-form-input>
-            <b-form-input
+            <b-form-input class="my-2 form-style"
                 v-model="billData.usage"
                 placeholder="Zużycie"
             ></b-form-input>
-            <b-form-input
+            <b-form-input class="my-2 form-style"
                 v-model="billData.cash"
                 placeholder="Koszt"
             ></b-form-input>
-            <b-form-input
+            <b-form-input class="my-2 form-style"
                 v-model="billData.description"
                 placeholder="Opis"
             ></b-form-input>
-            <b-button
+            <b-button class="my-2 add-bill-btn"
                 @click="sendBill()"
-                variant="primary"
+                block
             >
                 Wyślij
             </b-button>
@@ -28,7 +32,10 @@
         <p v-if="$store.state.addNewBillStatus === 0">Wysyłanie...</p>
         <p v-else-if="$store.state.addNewBillStatus === 1">Wysłano</p>
         <p v-else-if="$store.state.addNewBillStatus === -1">Wysyłanie nie powiodło się</p>
-    </div>
+        </b-card>
+            </b-col>
+        </b-row>
+    </b-container>
 </template>
 
 <script>
@@ -38,8 +45,8 @@ export default {
         return {
             billData: {
                 category: '',
-                usage: null,
-                cash: null,
+                usage: '',
+                cash: '',
                 description: '',
             },
         };
@@ -57,5 +64,15 @@ export default {
 </script>
 
 <style scoped>
-
+.bill-form{
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+.add-bill-btn{
+    background-color: #17a2b8;
+}
+.form-style{
+    border-color: #17a2b8;
+}
 </style>
