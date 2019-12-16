@@ -1,5 +1,5 @@
 from flask_jwt import jwt_required
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, inputs
 from models.bill import BillModel, datetime
 
 
@@ -21,6 +21,12 @@ class Bill(Resource):
                         type=float,
                         required=False
                         )
+
+    is_payed_parser = reqparse.RequestParser()
+    is_payed_parser.add_argument('is_payed',
+                                 type=inputs.boolean,
+                                 required=True,
+                                 help="This field cannot be left blank!")
 
     @jwt_required()
     def get(self, bill_id):
@@ -55,6 +61,21 @@ class Bill(Resource):
         return bill.json(), 201
 
     @jwt_required()
+    def put(self, bill_id):
+        """method for updating field 'is_payed' which is type boolean"""
+        is_payed_data = Bill.is_payed_parser.parse_args()
+
+        bill = BillModel.find_by_id(bill_id)
+        if bill is None:
+            return {'message': "Bill with id {} doesn't exist".format(bill_id)}
+        else:
+            bill.is_payed = is_payed_data['is_payed']
+
+        bill.save_to_db()
+
+        return bill.json()
+
+    @jwt_required()
     def delete(self, bill_id):
         """deletes bill with provided id"""
         bill = BillModel.find_by_id(bill_id)
@@ -69,5 +90,3 @@ class BillList(Resource):
     def get(self):
         """return json of every bill"""
         return {'bills': [bill.json() for bill in BillModel.find_all()]}
-
-
