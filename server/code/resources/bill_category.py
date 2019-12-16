@@ -14,4 +14,4 @@ class BillCategory(Resource):
 class BillCategoryList(Resource):
     @jwt_required()
     def get(self):
-        return {'bill categories': [x.json(extended=False) for x in BillCategoryModel.find_all()]}
+        return {'bill_categories': [x.json(extended=False) for x in BillCategoryModel.find_all()]}
