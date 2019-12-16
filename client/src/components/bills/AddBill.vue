@@ -33,6 +33,7 @@
         label="Spinning"></b-spinner>
         <p v-else-if="$store.state.addNewBillStatus === 1">Wysłano</p>
         <p v-else-if="$store.state.addNewBillStatus === -1">Wysyłanie nie powiodło się</p>
+        <p v-else-if="areInputsEmpty">Nie możesz dodać pustego rachunku</p>
         </b-card>
             </b-col>
         </b-row>
@@ -50,6 +51,7 @@ export default {
                 cash: null,
                 description: '',
             },
+            areInputsEmpty: false,
         };
     },
     beforeDestroy() {
@@ -57,7 +59,12 @@ export default {
     },
     methods: {
         sendBill() {
-            this.$store.dispatch('addNewBill', this.billData);
+            if (this.billData.cash !== null || this.billData.usage !== null || this.billData.description !== '') {
+                this.areInputsEmpty = false;
+                this.$store.dispatch('addNewBill', this.billData);
+            } else {
+                this.areInputsEmpty = true;
+            }
         },
     },
 };
