@@ -1,6 +1,7 @@
-from flask_jwt import jwt_required
+from flask_jwt import jwt_required, current_identity
 from flask_restful import Resource, reqparse, inputs
-from models.bill import BillModel, datetime
+from models.bill import BillModel
+from models.user import UserModel
 
 
 class Bill(Resource):
@@ -21,6 +22,9 @@ class Bill(Resource):
                         type=float,
                         required=False
                         )
+    parser.add_argument('payer_account',
+                        type=str,
+                        required=False)
 
     is_payed_parser = reqparse.RequestParser()
     is_payed_parser.add_argument('is_payed',
@@ -51,8 +55,16 @@ class Bill(Resource):
         #
         #     if last_bill.date.day == datetime.today().day:
         #         return {'message': "Bill of given category with today's date already exists"}, 400
+        user = UserModel.find_by_id(current_identity.id)
+        if data["payer_account"] != "":
+            bill = BillModel(data['usage'],
+                             data['cash'],
+                             data['description'],
+                             data['category_id'],
+                             data['payer_account'])
+        else:
+            bill = BillModel(data['usage'], data['cash'], data['description'], data['category_id'], user.bank_account)
 
-        bill = BillModel(data['usage'], data['cash'], data['description'], data['category_id'])
         try:
             bill.save_to_db()
         except:
