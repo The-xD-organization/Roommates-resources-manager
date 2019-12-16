@@ -29,7 +29,8 @@
                 Wyślij
             </b-button>
         </form>
-        <p v-if="$store.state.addNewBillStatus === 0">Wysyłanie...</p>
+        <b-spinner v-if="$store.state.addNewBillStatus === 0" variant="info"
+        label="Spinning"></b-spinner>
         <p v-else-if="$store.state.addNewBillStatus === 1">Wysłano</p>
         <p v-else-if="$store.state.addNewBillStatus === -1">Wysyłanie nie powiodło się</p>
         </b-card>

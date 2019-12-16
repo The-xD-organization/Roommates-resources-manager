@@ -1,11 +1,20 @@
 <template>
     <login-layout>
         <form @keydown.enter="login()">
-            <!-- nie wiem czego dokladnie uzywasz wiec dalem p
-                ale zrob tak zeby to bylo ladne kolorwe itp-->
             <p v-if="loginStatus === -1">
-                Błąd logowania<br> {{ $store.state.errorMesage }}
             </p>
+            <b-modal id="modal-1" title="Błąd logowania" ok-only>
+                <p class="my-4">Wprowadź login i hasło</p>
+            </b-modal>
+            <b-modal id="modal-2" title="Błąd logowania" ok-only>
+                <p class="my-4">Wprowadź login</p>
+            </b-modal>
+            <b-modal id="modal-3" title="Błąd logowania" ok-only>
+                <p class="my-4">Wprowadź hasło</p>
+            </b-modal>
+            <b-modal id="modal-4" title="Błąd logowania" ok-only>
+                <p class="my-4">safdasd</p>
+            </b-modal>
             <b-spinner v-if="loginStatus === 0" variant="info" label="Spinning"></b-spinner>
             <p v-if="inputErrors !== null">
                 {{ inputErrors }}
@@ -54,11 +63,11 @@ export default {
     methods: {
         login() {
             if (this.credentials.username === '' && this.credentials.password === '') {
-                this.inputErrors = 'Podaj nazwę użytkownika i hasło';
+                this.$bvModal.show('modal-1');
             } else if (this.credentials.username === '') {
-                this.inputErrors = 'Podaj nazwę użytkownika';
+                this.$bvModal.show('modal-2');
             } else if (this.credentials.password === '') {
-                this.inputErrors = 'Podaj hasło';
+                this.$bvModal.show('modal-3');
             } else {
                 this.inputErrors = '';
                 this.$store.dispatch('login', this.credentials);
