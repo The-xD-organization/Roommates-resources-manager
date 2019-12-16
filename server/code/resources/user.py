@@ -1,4 +1,4 @@
-from flask_jwt import jwt_required
+from flask_jwt import jwt_required, current_identity
 from flask_restful import Resource, reqparse
 from models.user import UserModel
 
@@ -37,8 +37,8 @@ class User(Resource):
 
     @classmethod        # todo add admin privilage
     @jwt_required()
-    def get(cls, user_id):
-        user = UserModel.find_by_id(user_id)
+    def get(cls):
+        user = UserModel.find_by_id(current_identity.id)
         if not user:
             return {'message': 'User not found'}, 404
         return user.json()
@@ -52,13 +52,13 @@ class User(Resource):
         return {'message': 'User deleted.'}, 200
 
     @jwt_required()
-    def put(self, user_id):
+    def put(self):
         """Method to update user's bank account field"""
         data = User.parser.parse_args()
 
-        user = UserModel.find_by_id(user_id)
+        user = UserModel.find_by_id(current_identity.id)
         if user is None:
-            return {'message': "User with id: {} doesn't exist.".format(user_id)}
+            return {'message': "There is no user with this ID, or your access_token is invalid."}
         else:
             user.bank_account = data['bank_account']
 

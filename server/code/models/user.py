@@ -1,5 +1,3 @@
-import sqlite3
-
 from db import db
 
 
@@ -14,7 +12,7 @@ class UserModel(db.Model):
     def __init__(self, username, password, bank_account=""):
         self.username = username
         self.password = password
-        self.bank_account
+        self.bank_account = bank_account
 
     def json(self):
         return{
@@ -38,3 +36,4 @@ class UserModel(db.Model):
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()
+

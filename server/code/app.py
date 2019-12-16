@@ -37,7 +37,7 @@ api.add_resource(Bill, '/bill', '/bill/<int:bill_id>')
 api.add_resource(BillList, '/bills')
 api.add_resource(BillCategoryList, '/bill_categories')
 api.add_resource(UserRegister, '/register')
-api.add_resource(User, '/user/<int:user_id>')
+api.add_resource(User, '/user', '/user/<int:user_id>')
 
 # if it's not __main__, it means we have imported this file (don't run the app then)
 if __name__ == '__main__':
