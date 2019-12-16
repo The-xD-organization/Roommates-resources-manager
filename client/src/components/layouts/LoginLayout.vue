@@ -77,13 +77,15 @@ export default {
     box-shadow: none;
 }
 .input-style{
-    margin-bottom: 40px;
     position: relative;
     align-items: stretch;
     width: 100%;
     background-color: #ffffff54;
     border:0;
     border-radius: 30px;
+}
+.margin {
+    margin-bottom: 20px;
 }
 .btn-submit{
     border:0;
