@@ -1,5 +1,3 @@
-import sqlite3
-
 from db import db
 
 
@@ -9,15 +7,18 @@ class UserModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
     password = db.Column(db.String(80))
+    bank_account = db.Column(db.String(28), default="")     # PLNN NNNN ... NNNN
 
-    def __init__(self, username, password):
+    def __init__(self, username, password, bank_account=""):
         self.username = username
         self.password = password
+        self.bank_account = bank_account
 
     def json(self):
         return{
             'id': self.id,
-            'username': self.username
+            'username': self.username,
+            'bank_account': self.bank_account
         }
 
     def save_to_db(self):
@@ -35,3 +36,4 @@ class UserModel(db.Model):
     @classmethod
     def find_by_id(cls, _id):
         return cls.query.filter_by(id=_id).first()
+
