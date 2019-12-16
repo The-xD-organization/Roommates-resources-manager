@@ -2,19 +2,8 @@
     <login-layout>
         <form @keydown.enter="login()">
             <p v-if="loginStatus === -1">
+                Błąd logowania<br> {{ $store.state.errorMesage }}
             </p>
-            <b-modal id="modal-1" title="Błąd logowania" ok-only>
-                <p class="my-4">Wprowadź login i hasło</p>
-            </b-modal>
-            <b-modal id="modal-2" title="Błąd logowania" ok-only>
-                <p class="my-4">Wprowadź login</p>
-            </b-modal>
-            <b-modal id="modal-3" title="Błąd logowania" ok-only>
-                <p class="my-4">Wprowadź hasło</p>
-            </b-modal>
-            <b-modal id="modal-4" title="Błąd logowania" ok-only>
-                <p class="my-4">safdasd</p>
-            </b-modal>
             <b-spinner v-if="loginStatus === 0" variant="info" label="Spinning"></b-spinner>
             <b-col>
             <b-form-input class="input-style"
@@ -22,7 +11,6 @@
                 type="email"
                 :state="nameState"
                 aria-describedby="input-live-help input-live-feedback"
-                placeholder="Wpisz login"
             ></b-form-input>
             <b-form-invalid-feedback class="margin" id="input-live-feedback">
             Wprowadź login
@@ -37,7 +25,6 @@
                 type="password"
                 :state="passwordState"
                 aria-describedby="input-live-help2 input-live-feedback2"
-                placeholder="Wpisz hasło"
             ></b-form-input>
             <b-form-invalid-feedback class="margin" id="input-live-feedback2">
             Wprowadź hasło
@@ -76,11 +63,11 @@ export default {
     methods: {
         login() {
             if (this.credentials.username === '' && this.credentials.password === '') {
-                this.$bvModal.show('modal-1');
+                this.inputErrors = 'Podaj nazwę użytkownika i hasło';
             } else if (this.credentials.username === '') {
-                this.$bvModal.show('modal-2');
+                this.inputErrors = 'Podaj nazwę użytkownika';
             } else if (this.credentials.password === '') {
-                this.$bvModal.show('modal-3');
+                this.inputErrors = 'Podaj hasło';
             } else {
                 this.inputErrors = '';
                 this.$store.dispatch('login', this.credentials);
