@@ -6,9 +6,7 @@
             <p v-if="loginStatus === -1">
                 Błąd logowania<br> {{ $store.state.errorMesage }}
             </p>
-            <p v-if="loginStatus === 0">
-                Logowanie...
-            </p>
+            <b-spinner v-if="loginStatus === 0" variant="info" label="Spinning"></b-spinner>
             <p v-if="inputErrors !== null">
                 {{ inputErrors }}
             </p>
