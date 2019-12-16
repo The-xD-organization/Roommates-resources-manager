@@ -1,7 +1,8 @@
 <template>
     <div>
         <!-- To trzeba ladnie zrobic -->
-        <p v-if="$store.state.getBillStatus == 0">Ładownie...</p>
+        <b-spinner v-if="$store.state.getBillStatus == 0" variant="info"
+        label="Spinning"></b-spinner>
         <p v-if="$store.state.getBillStatus == -1">Błąd ładowania</p>
         <b-card
         variant="info"
