@@ -27,6 +27,7 @@ api = Api(app)
 #     db.create_all()
 
 
+
 jwt = JWT(app, authenticate, identity)  # creates /auth endpoint
 
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)     # change later
