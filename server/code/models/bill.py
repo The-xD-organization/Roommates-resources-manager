@@ -17,7 +17,7 @@ class BillModel(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('bill_categories.id'))
     category = db.relationship('BillCategoryModel')
 
-    def __init__(self, usage, cash, description, category_id,  payer_account="", is_payed=0,):
+    def __init__(self, usage, cash, description, category_id,  payer_account="", is_payed=0):
         self.usage = usage
         self.cash = cash
         self.description = description
