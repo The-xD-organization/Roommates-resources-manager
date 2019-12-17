@@ -5,24 +5,39 @@
         <b-card title="Dodaj rachunek"
         border-variant="info">
         <form>
-            <!-- Kategorie zmienię na fajnego selecta -->
-            <b-form-input class="my-2 form-style"
+            <!-- <b-form-input class="my-2 form-style"
                 v-model="billData.category"
                 placeholder="Kategoria"
-            ></b-form-input>
-            <b-form-input class="my-2 form-style"
+            ></b-form-input> -->
+            <b-form-select
+                class="my-2 form-style"
+                v-model="billData.category"
+            >
+                <option :value="null" disabled>Kategoria</option>
+                <option
+                    v-for="(category, index) in $store.state.categoriesList" :key="index"
+                    :value="index"
+                >
+                    {{ category }}
+                </option>
+            </b-form-select>
+            <b-form-input
+                class="my-2 form-style"
                 v-model="billData.usage"
                 placeholder="Zużycie"
             ></b-form-input>
-            <b-form-input class="my-2 form-style"
+            <b-form-input
+                class="my-2 form-style"
                 v-model="billData.cash"
                 placeholder="Koszt"
             ></b-form-input>
-            <b-form-input class="my-2 form-style"
+            <b-form-input
+                class="my-2 form-style"
                 v-model="billData.description"
                 placeholder="Opis"
             ></b-form-input>
-            <b-button class="my-2 add-bill-btn"
+            <b-button
+                class="my-2 add-bill-btn"
                 @click="sendBill()"
                 block
             >
@@ -46,7 +61,7 @@ export default {
     data() {
         return {
             billData: {
-                category: '',
+                category: null,
                 usage: null,
                 cash: null,
                 description: '',
@@ -59,13 +74,18 @@ export default {
     },
     methods: {
         sendBill() {
-            if (this.billData.cash !== null || this.billData.usage !== null || this.billData.description !== '') {
+            if (this.billData.cash !== null
+            || this.billData.usage !== null
+            || this.billData.description !== null) {
                 this.areInputsEmpty = false;
                 this.$store.dispatch('addNewBill', this.billData);
             } else {
                 this.areInputsEmpty = true;
             }
         },
+    },
+    mounted() {
+        this.$store.dispatch('getBillCategories');
     },
 };
 
