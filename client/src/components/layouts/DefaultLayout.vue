@@ -80,7 +80,7 @@
         <b-container fluid>
             <b-row class="text-center">
                 <b-col>
-                    <span class="text-white">Copyright © The-xD-organization</span>
+                    <span class="text-white">Copyright © The "xD" organization</span>
                 </b-col>
             </b-row>
         </b-container>

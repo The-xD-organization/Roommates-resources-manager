@@ -31,7 +31,7 @@
                     <b-container>
                         <b-row class="text-center">
                             <b-col>
-                                <span >Copyright © The-xD-organization</span>
+                                <span >Copyright © The "xD" organization</span>
                             </b-col>
                         </b-row>
                     </b-container>

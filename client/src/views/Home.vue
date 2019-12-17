@@ -9,15 +9,13 @@
                         header-level="4"
                         text-variant="dark"
                         lead="Aplikacja do zarządzania zasobami dla współlokatorów">
-                        <p>Aplikacja powstaje w celu ułatwienia zarządania zasobami współlokatorów.
-                        </p>
                         </b-jumbotron>
                             <b-button class="btn1"
                             variant="primary" href="#section2">V</b-button>
                     </div>
                     <div id="section2" class="sec2">
                         <div class="about-app">
-                        <h2 class="mt-2 font-weight-light">Funkcjonalność</h2>
+                        <h2 class="mt-2 font-weight-light">Funkcjonalności</h2>
                         </div>
                         <b-container fluid>
                             <b-row class="m-3 justify-content-sm-center">
@@ -42,7 +40,7 @@
                                     src="https://image.flaticon.com/icons/png/512/313/313434.png"
                                     class="utility_img" alt="Responsive image"></b-img>
                                     </div>
-                                    <p> Funkcjonalność Rachunki pozwoli w prosty sposób
+                                    <p> Opcja ta pozwoli w prosty sposób
                                         wprowadzać, przechowywać oraz zarządzać rachunkami.
                                         Rachunki będą posiadały odpowiednie kategorie,
                                         która w przyszłości pozwoli na ich filtrowanie.
@@ -72,7 +70,7 @@
                                     src="https://image.flaticon.com/icons/png/512/1547/1547315.png"
                                     class="utility_img" alt="Responsive image"></b-img>
                                     </div>
-                                    <p>Funkcjonalność Długi ułatwi rozliczanie się między
+                                    <p>Funkcjonalność "Długi" ułatwi rozliczanie się między
                                         współlokatorami.</p>
                                     </b-card>
                                 </b-col>
