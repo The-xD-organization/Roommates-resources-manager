@@ -9,7 +9,7 @@
         class="my-2"
         border-variant="info"
         v-for="bill in $store.state.billsList" :key = bill.id>
-            <h5>Nazwa kategorii: {{ bill.category_id }}</h5>
+            <h5>{{ $store.state.categoriesList[bill.category_id] }}</h5>
             <hr>
             <p v-show="bill.usage != 0">Zużycie: {{ bill.usage }}</p>
             <p v-show="bill.cash != 0">Koszt: {{ bill.cash }}</p>
@@ -27,6 +27,7 @@ export default {
         };
     },
     mounted() {
+        this.$store.dispatch('getBillCategories');
         this.$store.dispatch('getBills');
     },
 };

@@ -12,6 +12,7 @@ export default new Vuex.Store({
         getBillStatus: null,
         billsList: null,
         addNewBillStatus: null,
+        categoriesList: [],
     },
     mutations: {
         setLoginStatus(state, payload) {
@@ -28,6 +29,11 @@ export default new Vuex.Store({
         },
         setAddNewBillStatus(state, payload) {
             state.addNewBillStatus = payload;
+        },
+        setBillCategories(state, payload) {
+            Object.keys(payload).forEach((key) => {
+                state.categoriesList[payload[key].id] = payload[key].name;
+            });
         },
     },
     actions: {
@@ -83,6 +89,17 @@ export default new Vuex.Store({
                 .catch((error) => {
                     commit('setErrorMessage', error);
                     commit('setGetBillStatus', -1);
+                });
+        },
+        getBillCategories({ commit }) {
+            axios.get(`${process.env.VUE_APP_API_URL}/bill_categories`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    commit('setBillCategories', response.data.bill_categories);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
                 });
         },
     },
