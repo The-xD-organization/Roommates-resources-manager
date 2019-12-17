@@ -4,7 +4,8 @@
             <p v-if="loginStatus === -1">
                 Błąd logowania<br> {{ $store.state.errorMesage }}
             </p>
-            <b-spinner v-if="loginStatus === 0" variant="info" label="Spinning"></b-spinner>
+            <b-spinner class="mb-3"
+            v-if="loginStatus === 0" variant="info" label="Spinning"></b-spinner>
             <b-col>
             <b-form-input class="input-style"
                 v-model="credentials.username"

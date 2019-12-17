@@ -55,7 +55,7 @@ export default {
     padding-top:20px;
 }
 .content{
-    margin-top: 8%;
+    margin-top: 5%;
 }
 .container{
     height: 100%;
@@ -85,7 +85,7 @@ export default {
     border-radius: 30px;
 }
 .margin {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 .btn-submit{
     border:0;
