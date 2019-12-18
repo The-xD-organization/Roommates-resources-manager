@@ -4,37 +4,31 @@
             <p v-if="loginStatus === -1">
                 Błąd logowania<br> {{ $store.state.errorMesage }}
             </p>
-            <b-spinner class="mb-3"
-            v-if="loginStatus === 0" variant="info" label="Spinning"></b-spinner>
+            <b-spinner
+            class="mb-3"
+            v-if="loginStatus === 0" variant="info" label="Spinning"
+            ></b-spinner>
+            <p v-if="inputErrors !== null">
+                {{ inputErrors }}
+            </p>
             <b-col>
-            <b-form-input class="input-style"
+            <b-form-input 
+                class="input-style"
                 v-model="credentials.username"
                 type="email"
-                :state="nameState"
-                aria-describedby="input-live-help input-live-feedback"
+                placeholder="login"
             ></b-form-input>
-            <b-form-invalid-feedback class="margin" id="input-live-feedback">
-            Wprowadź login
-            </b-form-invalid-feedback>
-            <b-form-valid-feedback class="margin" id="input-live-help">
-                <br>
-            </b-form-valid-feedback>
             </b-col>
             <b-col>
-            <b-form-input class="input-style"
+            <b-form-input 
+                class="input-style"
                 v-model="credentials.password"
                 type="password"
-                :state="passwordState"
-                aria-describedby="input-live-help2 input-live-feedback2"
+                placeholder="hasło"
             ></b-form-input>
-            <b-form-invalid-feedback class="margin" id="input-live-feedback2">
-            Wprowadź hasło
-            </b-form-invalid-feedback>
-            <b-form-valid-feedback class="margin" id="input-live-help2">
-                <br>
-            </b-form-valid-feedback>
             </b-col>
-            <b-button class="btn-submit"
+            <b-button 
+                class="btn-submit"
                 @click="login()"
             >
                 Zaloguj się

@@ -19,7 +19,7 @@
                         </div>
                         <b-container fluid>
                             <b-row class="m-3 justify-content-sm-center">
-                                <b-col cols="12" sm="5" md="4" class="m-2">
+                                <b-col cols="12" md="5" class="m-2">
                                     <b-card
                                     title="Dashboard"
                                     sub-title="(work in progress)">
@@ -32,7 +32,7 @@
                                         oczekujące obowiązki oraz skróty do funkcjonalności.</p>
                                     </b-card>
                                 </b-col>
-                                <b-col cols="12" sm="5" md="4" class="m-2">
+                                <b-col cols="12" md="5" class="m-2">
                                     <b-card
                                     title="Rachunki">
                                      <div>
@@ -47,7 +47,7 @@
                                     </p>
                                     </b-card>
                                 </b-col>
-                                <b-col cols="12" sm="5" md="4" class="m-2">
+                                <b-col cols="12" md="5" class="m-2">
                                     <b-card
                                     title="Obowiązki"
                                     sub-title="(work in progress)">
@@ -61,7 +61,7 @@
                                     </p>
                                     </b-card>
                                 </b-col>
-                                <b-col cols="12" sm="5" md="4" class="m-2">
+                                <b-col cols="12" md="5" class="m-2">
                                     <b-card
                                     title="Długi"
                                     sub-title="(work in progress)">
@@ -74,7 +74,7 @@
                                         współlokatorami.</p>
                                     </b-card>
                                 </b-col>
-                                <b-col cols="12" sm="5" md="4" class="m-2">
+                                <b-col cols="12" md="5" class="m-2">
                                     <b-card
                                     title="Kalkulator zużycia"
                                     sub-title="(work in progress)"  >
