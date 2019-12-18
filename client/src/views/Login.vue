@@ -12,7 +12,7 @@
                 {{ inputErrors }}
             </p>
             <b-col>
-            <b-form-input 
+            <b-form-input
                 class="input-style"
                 v-model="credentials.username"
                 type="email"
@@ -20,14 +20,14 @@
             ></b-form-input>
             </b-col>
             <b-col>
-            <b-form-input 
+            <b-form-input
                 class="input-style"
                 v-model="credentials.password"
                 type="password"
                 placeholder="hasło"
             ></b-form-input>
             </b-col>
-            <b-button 
+            <b-button
                 class="btn-submit"
                 @click="login()"
             >
