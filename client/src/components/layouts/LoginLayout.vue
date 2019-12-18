@@ -83,9 +83,7 @@ export default {
     background-color: #ffffff54;
     border:0;
     border-radius: 30px;
-}
-.margin {
-    margin-bottom: 15px;
+    margin-bottom: 40px;
 }
 .btn-submit{
     border:0;
