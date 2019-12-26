@@ -1,27 +1,31 @@
 <template>
     <div>
-        <!-- To trzeba ladnie zrobic -->
         <b-spinner v-if="$store.state.getBillStatus == 0" variant="info"
         label="Spinning"></b-spinner>
         <p v-if="$store.state.getBillStatus == -1">Błąd ładowania</p>
         <b-card
-        variant="info"
-        class="my-2"
-        border-variant="info"
-        v-for="bill in $store.state.billsList" :key = bill.id>
+            variant="info"
+            class="my-2"
+            border-variant="info"
+            v-for="bill in $store.state.billsList" :key = bill.id
+        >
             <h5>{{ $store.state.categoriesList[bill.category_id] }}</h5>
             <hr>
-            <p v-show="bill.usage != 0">Zużycie: {{ bill.usage }}</p>
-            <p v-show="bill.cash != 0">Koszt: {{ bill.cash }} zł</p>
-            <p>Data: {{ bill.date }}</p>
-            <p v-show="bill.description!=''">Opis: {{ bill.description }}</p>
+            <ShowBill
+                v-bind:bill="bill"
+            />
         </b-card>
     </div>
 </template>
 
 <script>
+import ShowBill from '@/components/bills/ShowBill.vue';
+
 export default {
     name: 'BillsList',
+    components: {
+        ShowBill,
+    },
     data() {
         return {
         };
