@@ -34,7 +34,7 @@ class Bill(Resource):
 
     @jwt_required()
     def get(self, bill_id):
-        """returns latest bill of given category"""
+        """returns bill with given id"""
         try:
             bill = BillModel.find_by_id(bill_id)
         except:
@@ -66,6 +66,7 @@ class Bill(Resource):
             bill = BillModel(data['usage'], data['cash'], data['description'], data['category_id'], user.bank_account)
 
         try:
+            print(bill.json())
             bill.save_to_db()
         except:
             return {'message': "An error occurred inserting the bill."}, 500
