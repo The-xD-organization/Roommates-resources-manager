@@ -38,7 +38,6 @@ class TaskModel(db.Model):
 
     def save_to_db(self):
         db.session.add(self)
-        sqlite_pragma.set_sqlite_pragma
         db.session.commit()
 
     def delete_from_db(self):

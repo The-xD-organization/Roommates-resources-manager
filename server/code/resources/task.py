@@ -35,6 +35,7 @@ class Task(Resource):
         try:
             print(task.json())
             task.save_to_db()
+        #TODO change when merging to master, test only
         except Exception as E:
             return {'message': "{}".format(E)}, 500
         return task.json(), 201
