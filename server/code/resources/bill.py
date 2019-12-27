@@ -56,7 +56,7 @@ class Bill(Resource):
         #     if last_bill.date.day == datetime.today().day:
         #         return {'message': "Bill of given category with today's date already exists"}, 400
         user = UserModel.find_by_id(current_identity.id)
-        if data["payer_account"] != "":
+        if data["payer_account"] not in {"", None}:
             bill = BillModel(data['usage'],
                              data['cash'],
                              data['description'],
