@@ -10,6 +10,7 @@ from security import authenticate, identity
 from resources.user import UserRegister, User
 from resources.bill import Bill, BillList
 from resources.bill_category import BillCategory, BillCategoryList
+from resources.task import Task, TaskList
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
@@ -27,17 +28,16 @@ api = Api(app)
 #     db.create_all()
 
 
-
-
 jwt = JWT(app, authenticate, identity)  # creates /auth endpoint
 
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(hours=1)     # change later
-
 
 api.add_resource(BillCategory, '/bill_category/<string:name>')
 api.add_resource(Bill, '/bill', '/bill/<int:bill_id>')
 api.add_resource(BillList, '/bills')
 api.add_resource(BillCategoryList, '/bill_categories')
+api.add_resource(Task, '/task', '/task/<int:task_id>')
+api.add_resource(TaskList, '/tasks')
 api.add_resource(UserRegister, '/register')
 api.add_resource(User, '/user', '/user/<int:user_id>')
 

@@ -34,7 +34,7 @@ class Bill(Resource):
 
     @jwt_required()
     def get(self, bill_id):
-        """returns latest bill of given category"""
+        """returns bill with given id"""
         try:
             bill = BillModel.find_by_id(bill_id)
         except:
