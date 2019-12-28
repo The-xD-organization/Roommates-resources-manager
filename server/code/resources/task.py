@@ -58,7 +58,7 @@ class Task(Resource):
             #   assigning currently logged user to task
             task.assignee_id = user.id
             task.assignee_name = user.username
-        elif data['is_done']:
+        elif data['is_done'] is not None:
             user = UserModel.find_by_id(current_identity.id)
             if task.assignee_id == user.id:
                 #   updating is_done field
