@@ -6,7 +6,9 @@
         <p v-show="bill.description!=''">Opis: {{ bill.description }}</p>
         <p @click="showPayerAccount = true">
             <span class="acc_number">Numer konta</span>
-            <span v-if="showPayerAccount === true"> : {{ bill.payer_account }} lorem ipsum</span>
+            <span v-if="showPayerAccount === true">: {{ bill.payer_account }}
+                <span v-if="bill.payer_account == ''">Brak</span>
+            </span>
         </p>
     </div>
 </template>
