@@ -66,7 +66,6 @@ class Bill(Resource):
             bill = BillModel(data['usage'], data['cash'], data['description'], data['category_id'], user.bank_account)
 
         try:
-            print(bill.json())
             bill.save_to_db()
         except:
             return {'message': "An error occurred inserting the bill."}, 500

@@ -1,6 +1,5 @@
 from db import db
 from datetime import datetime
-import sqlite_pragma
 
 
 class TaskModel(db.Model):
@@ -10,6 +9,7 @@ class TaskModel(db.Model):
     description = db.Column(db.String(100), nullable=False)
     is_done = db.Column(db.Boolean, default=False, nullable=True)
     date_of_creation = db.Column(db.DateTime(timezone=False), default=datetime.today)
+    assignee_name = db.Column(db.String(80), default=None)
 
     assignee_id = db.Column(db.Integer, db.ForeignKey('users.id'), default=None)
     assignee = db.relationship('UserModel')
@@ -22,7 +22,7 @@ class TaskModel(db.Model):
     def json(self):
         date = str(self.date_of_creation)
         return {'id': self.id,
-                'assignee_id': self.assignee_id,
+                'assignee_name': self.assignee_name,
                 'description': self.description,
                 'is_done': self.is_done,
                 'date_of_creation': date[:10]

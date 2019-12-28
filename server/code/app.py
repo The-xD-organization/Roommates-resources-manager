@@ -23,9 +23,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
 
 # TODO usun przed wrzuceniem na heroku
-@app.before_first_request
-def create_tables():
-    db.create_all()
+# @app.before_first_request
+# def create_tables():
+#     db.create_all()
 
 
 jwt = JWT(app, authenticate, identity)  # creates /auth endpoint
@@ -37,7 +37,7 @@ api.add_resource(Bill, '/bill', '/bill/<int:bill_id>')
 api.add_resource(BillList, '/bills')
 api.add_resource(BillCategoryList, '/bill_categories')
 api.add_resource(Task, '/task', '/task/<int:task_id>')
-api.add_resource(TaskList, '/tasks', '/task/<int:task_id>')
+api.add_resource(TaskList, '/tasks')
 api.add_resource(UserRegister, '/register')
 api.add_resource(User, '/user', '/user/<int:user_id>')
 
