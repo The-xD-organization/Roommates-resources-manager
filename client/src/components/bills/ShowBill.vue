@@ -5,8 +5,8 @@
         <p>Data: {{ bill.date }}</p>
         <p v-show="bill.description!=''">Opis: {{ bill.description }}</p>
         <p @click="showPayerAccount = true">
-            Numer konta
-            <span v-if="showPayerAccount === true">: {{ bill.payer_account }} lorem ipsum</span>
+            <span class="acc_number">Numer konta</span>
+            <span v-if="showPayerAccount === true"> : {{ bill.payer_account }} lorem ipsum</span>
         </p>
     </div>
 </template>
@@ -27,5 +27,10 @@ export default {
 </script>
 
 <style scoped>
-
+.acc_number{
+    color: #17a2b8;
+}
+.acc_number:hover{
+    cursor: pointer;
+}
 </style>
