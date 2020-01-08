@@ -1,18 +1,70 @@
 <template>
     <default-layout>
-        <div>
-            <p>Te obowiazki</p>
-        </div>
+        <b-container class="my-2">
+            <b-row>
+                <b-col>
+            <b-card text-black border-variant="0">
+                <b-row align-h="start">
+                    <b-col sm="4" md="3" xl="2">
+                <h2>Obowiązki</h2>
+                    </b-col>
+                    <b-col sm="4" md="2">
+                <b-button variant="btn" class="mt-1"
+                    v-show="mode != 1"
+                    @click="mode = 1"
+                >
+                    Dodaj
+                </b-button>
+                <b-button variant="btn" class="mt-1"
+                    v-show="mode != 0"
+                    @click="mode = 0"
+                >
+                    Wyświetl listę
+                </b-button>
+                    </b-col>
+                </b-row>
+            </b-card>
+            <b-card border-variant="0">
+            <TasksList
+                v-if="mode==0"
+            />
+            <AddTask
+                v-if="mode==1"
+            />
+            </b-card>
+                </b-col>
+            </b-row>
+        </b-container>
     </default-layout>
 </template>
 
 <script>
 import DefaultLayout from '@/components/layouts/DefaultLayout.vue';
+import TasksList from '@/components/tasks/TasksList.vue';
+import AddTask from '@/components/tasks/AddTask.vue';
 
 export default {
     name: 'tasks',
     components: {
         DefaultLayout,
+        TasksList,
+        AddTask,
+    },
+    data() {
+        return {
+            mode: 0,
+        };
     },
 };
 </script>
+<style scoped>
+.btn{
+    background-color:white;
+    border-color: #17a2b8;
+    color:#17a2b8;
+}
+.btn:hover{
+    background-color: #17a2b8;
+    color:white;
+}
+</style>

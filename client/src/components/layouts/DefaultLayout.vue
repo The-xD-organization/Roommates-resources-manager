@@ -27,7 +27,7 @@
                             to="/bills">
                                 Rachunki
                         </router-link></b-nav-item>
-                    <b-nav-item disabled><router-link
+                    <b-nav-item><router-link
                             class="nav-link"
                             to="/tasks">
                                 Obowiązki
