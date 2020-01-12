@@ -15,6 +15,7 @@ export default new Vuex.Store({
         categoriesList: [],
         tasksList: null,
         getTaskStatus: null,
+        addNewTaskStatus: null,
     },
     mutations: {
         setLoginStatus(state, payload) {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
         },
         setTasksList(state, payload) {
             state.tasksList = payload;
+        },
+        setAddNewTaskStatus(state, payload) {
+            state.addNewTaskStatus = payload;
         },
     },
     actions: {
@@ -96,7 +100,7 @@ export default new Vuex.Store({
                 })
                 .catch((error) => {
                     commit('setErrorMessage', error);
-                    commit('setGetBillStatus', -1);
+                    commit('setAddNewBillStatus', -1);
                 });
         },
         getBillCategories({ commit }) {
@@ -116,13 +120,31 @@ export default new Vuex.Store({
                 headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
             })
                 .then((response) => {
-                    console.log(response.data.tasks);
                     commit('setTasksList', response.data.tasks);
                     commit('setGetTaskStatus', 1);
                 })
                 .catch((error) => {
                     commit('setErrorMessage', error);
                     commit('setGetTaskStatus', -1);
+                });
+        },
+        addNewTask({ commit }, taskData) {
+            commit('setAddNewTaskStatus', 0);
+            axios.post(`${process.env.VUE_APP_API_URL}/task`, {
+                description: taskData.description,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setAddNewTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setAddNewTaskStatus', -1);
                 });
         },
     },
