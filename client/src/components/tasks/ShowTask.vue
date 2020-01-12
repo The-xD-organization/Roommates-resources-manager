@@ -1,13 +1,19 @@
 <template>
     <div>
-        <h5> /Obowiązek/ </h5>
+        <h5> {{ task.description }} </h5>
         <hr>
-        <p>Data utworzenia: </p>
-        <p>Przypisana osoba: </p>
-        <b-button variant="btn" class="m-1">
+        <p>Data utworzenia: {{ task.date_of_creation }}</p>
+        <p v-if="task.assignee_name != null">Przypisana osoba: {{ task.assignee_name }} </p>
+        <b-button
+            v-else
+            variant="btn" class="m-1"
+        >
             Przypisz się
         </b-button>
-        <b-button variant="btn" class="m-1">
+        <b-button
+            v-if="task.is_done == false"
+            variant="btn" class="m-1"
+        >
             Zrobione
         </b-button>
     </div>
@@ -17,6 +23,7 @@
 export default {
     name: 'ShowTask',
     props: {
+        task: Object,
     },
 };
 

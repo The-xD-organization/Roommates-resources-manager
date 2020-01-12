@@ -13,6 +13,8 @@ export default new Vuex.Store({
         billsList: null,
         addNewBillStatus: null,
         categoriesList: [],
+        tasksList: null,
+        getTaskStatus: null,
     },
     mutations: {
         setLoginStatus(state, payload) {
@@ -34,6 +36,12 @@ export default new Vuex.Store({
             Object.keys(payload).forEach((key) => {
                 state.categoriesList[payload[key].id] = payload[key].name;
             });
+        },
+        setGetTaskStatus(state, payload) {
+            state.getTaskStatus = payload;
+        },
+        setTasksList(state, payload) {
+            state.tasksList = payload;
         },
     },
     actions: {
@@ -100,6 +108,21 @@ export default new Vuex.Store({
                 })
                 .catch((error) => {
                     commit('setErrorMessage', error);
+                });
+        },
+        getTasks({ commit }) {
+            commit('setGetTaskStatus', 0);
+            axios.get(`${process.env.VUE_APP_API_URL}/tasks`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    console.log(response.data.tasks);
+                    commit('setTasksList', response.data.tasks);
+                    commit('setGetTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setGetTaskStatus', -1);
                 });
         },
     },
