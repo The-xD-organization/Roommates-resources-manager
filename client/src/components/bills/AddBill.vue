@@ -64,7 +64,7 @@ export default {
                 category: null,
                 usage: null,
                 cash: null,
-                description: '',
+                description: null,
             },
             areInputsEmpty: false,
         };
