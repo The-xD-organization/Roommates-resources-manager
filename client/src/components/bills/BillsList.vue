@@ -16,7 +16,8 @@
                 v-for="bill in $store.state.billsList" :key = bill.id
             >
                 <ShowBill
-                    v-if="paid == bill.is_payed || notPaid == !bill.is_payed"
+                    v-if="(paid == bill.is_payed || notPaid == !bill.is_payed)
+                        && !(notPaid == false && paid == false)"
                     v-bind:bill="bill"
                 />
             </div>
