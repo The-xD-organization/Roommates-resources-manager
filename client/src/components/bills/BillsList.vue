@@ -1,14 +1,25 @@
 <template>
     <div>
-        <b-spinner v-if="$store.state.getBillStatus == 0" variant="info"
-        label="Spinning"></b-spinner>
+        <b-spinner
+            v-if="$store.state.getBillStatus == 0"
+            variant="info"
+            label="Spinning"
+        ></b-spinner>
         <p v-if="$store.state.getBillStatus == -1">Błąd ładowania</p>
-        <div
-            v-for="bill in $store.state.billsList" :key = bill.id
-        >
-            <ShowBill
-                v-bind:bill="bill"
-            />
+        <div v-else>
+            Wyświetlaj:
+            <input type="checkbox" id="not-paid" value="true" v-model="notPaid">
+            <label for="not-paid">Niezapłacone</label>
+            <input type="checkbox" id="paid" value="true" v-model="paid">
+            <label for="paid">Zapłacone</label>
+            <div
+                v-for="bill in $store.state.billsList" :key = bill.id
+            >
+                <ShowBill
+                    v-if="paid == bill.is_payed || notPaid == !bill.is_payed"
+                    v-bind:bill="bill"
+                />
+            </div>
         </div>
     </div>
 </template>
@@ -23,6 +34,8 @@ export default {
     },
     data() {
         return {
+            notPaid: true,
+            paid: true,
         };
     },
     mounted() {
