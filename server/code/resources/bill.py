@@ -97,6 +97,20 @@ class Bill(Resource):
         return {'message': 'Bill deleted'}
 
 
+class LatestBill(Resource):
+    @jwt_required()
+    def get(self):
+        """returns latest bill"""
+        try:
+            bill = BillModel.find_latest_bill()
+        except:
+            return {"message": "An error occurred finding latest bill."}, 500  # Internal server error
+
+        if bill:
+            return bill.json()
+        return {'message': 'Bill not found'}, 404
+
+
 class BillList(Resource):
     @jwt_required()
     def get(self):
