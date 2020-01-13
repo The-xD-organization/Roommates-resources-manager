@@ -44,8 +44,11 @@
                 Wyślij
             </b-button>
         </form>
-        <b-spinner v-if="$store.state.addNewBillStatus === 0" variant="info"
-        label="Spinning"></b-spinner>
+        <b-spinner
+            v-if="$store.state.addNewBillStatus === 0"
+            variant="info"
+            label="Spinning">
+        </b-spinner>
         <p v-else-if="$store.state.addNewBillStatus === 1">Wysłano</p>
         <p v-else-if="$store.state.addNewBillStatus === -1">Wysyłanie nie powiodło się</p>
         <p v-else-if="areInputsEmpty">Nie możesz dodać pustego rachunku</p>

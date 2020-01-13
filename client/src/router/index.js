@@ -53,6 +53,14 @@ const routes = [
             title: 'Zadania',
         },
     },
+    {
+        path: '/profile',
+        name: 'profile',
+        component: () => import('../views/Profile.vue'),
+        meta: {
+            title: 'Profil',
+        },
+    },
 ];
 
 const router = new VueRouter({

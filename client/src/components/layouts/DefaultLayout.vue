@@ -61,12 +61,20 @@
                     <template v-slot:button-content>
                         <em>Konto</em>
                     </template>
-                    <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <b-dropdown-item><router-link
+                    <b-dropdown-item>
+                        <router-link
+                            class="link"
+                            to="/profile">
+                        Profil
+                        </router-link>
+                        </b-dropdown-item>
+                    <b-dropdown-item>
+                        <router-link
                             class="link"
                             to="/logout">
                                 Wyloguj
-                        </router-link></b-dropdown-item>
+                        </router-link>
+                    </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
                 </b-collapse>

@@ -20,6 +20,10 @@ export default new Vuex.Store({
         tasksList: null,
         getTaskStatus: null,
         addNewTaskStatus: null,
+
+        userData: null,
+        userDataStatus: null,
+        changeBankAccStatus: null,
     },
     mutations: {
         setLoginStatus(state, payload) {
@@ -53,6 +57,15 @@ export default new Vuex.Store({
         },
         setAddNewTaskStatus(state, payload) {
             state.addNewTaskStatus = payload;
+        },
+        setUserData(state, payload) {
+            state.userData = payload;
+        },
+        setUserDataStatus(state, payload) {
+            state.userDataStatus = payload;
+        },
+        setChangeBankAccStatus(state, payload) {
+            state.changeBankAccStatus = payload;
         },
     },
     actions: {
@@ -172,6 +185,40 @@ export default new Vuex.Store({
                 .catch((error) => {
                     commit('setErrorMessage', error);
                     commit('setAddNewTaskStatus', -1);
+                });
+        },
+
+        changeBankAcc({ commit }, newNumber) {
+            commit('setChangeBankAccStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/user`, {
+                bank_account: newNumber,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setChangeBankAccStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setChangeBankAccStatus', -1);
+                });
+        },
+        getUserData({ commit }) {
+            commit('setUserDataStatus', 0);
+            axios.get(`${process.env.VUE_APP_API_URL}/user`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    commit('setUserData', response.data);
+                    commit('setUserDataStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setUserDataStatus', -1);
                 });
         },
     },
