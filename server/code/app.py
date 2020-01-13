@@ -10,7 +10,7 @@ from security import authenticate, identity
 from resources.user import UserRegister, User
 from resources.bill import Bill, BillList, LatestBill
 from resources.bill_category import BillCategory, BillCategoryList
-from resources.task import Task, TaskList
+from resources.task import Task, TaskList, MyTasks
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
@@ -39,6 +39,7 @@ api.add_resource(BillCategoryList, '/bill_categories')
 api.add_resource(LatestBill, '/latest_bill')
 api.add_resource(Task, '/task', '/task/<int:task_id>')
 api.add_resource(TaskList, '/tasks')
+api.add_resource(MyTasks, '/my_tasks')
 api.add_resource(UserRegister, '/register')
 api.add_resource(User, '/user', '/user/<int:user_id>')
 
