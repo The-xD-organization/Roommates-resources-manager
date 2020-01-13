@@ -24,6 +24,9 @@ export default new Vuex.Store({
         userData: null,
         userDataStatus: null,
         changeBankAccStatus: null,
+
+        homeBill: null,
+        homeTask: null,
     },
     mutations: {
         setLoginStatus(state, payload) {
@@ -66,6 +69,12 @@ export default new Vuex.Store({
         },
         setChangeBankAccStatus(state, payload) {
             state.changeBankAccStatus = payload;
+        },
+        setHomeBill(state, payload) {
+            state.homeBill = payload;
+        },
+        setHomeTask(state, payload) {
+            state.homeTask = payload;
         },
     },
     actions: {
@@ -219,6 +228,35 @@ export default new Vuex.Store({
                 .catch((error) => {
                     commit('setErrorMessage', error);
                     commit('setUserDataStatus', -1);
+                });
+        },
+
+        getHomeBill({ commit }) {
+            commit('setGetBillStatus', 0);
+            axios.get(`${process.env.VUE_APP_API_URL}/latest_bill`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    commit('setHomeBill', response.data);
+                    commit('setGetBillStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setGetBillStatus', -1);
+                });
+        },
+        getHomeTask({ commit }) {
+            commit('setGetTaskStatus', 0);
+            axios.get(`${process.env.VUE_APP_API_URL}/my_tasks`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    commit('setHomeTask', response.data.tasks);
+                    commit('setGetTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setGetTaskStatus', -1);
                 });
         },
     },
