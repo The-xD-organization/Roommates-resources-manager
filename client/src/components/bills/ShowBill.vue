@@ -3,9 +3,17 @@
         variant="info"
         class="my-2"
         border-variant="info"
-        :class="{payed: bill.is_payed}"
+        :class="{payed: bill.is_payed||payClicked}"
     >
         <h5>{{ $store.state.categoriesList[bill.category_id] }}</h5>
+        <b-button
+            variant="btn"
+            class="mt-1"
+            v-show="!bill.is_payed"
+            @click="payBill()"
+        >
+           Zapłacony
+        </b-button>
         <hr>
         <p v-show="bill.usage != 0">Zużycie: {{ bill.usage }}</p>
         <p v-show="bill.cash != 0">Koszt: {{ bill.cash }} zł</p>
@@ -27,7 +35,14 @@ export default {
     data() {
         return {
             showPayerAccount: false,
+            payClicked: false,
         };
+    },
+    methods: {
+        payBill() {
+            this.$store.dispatch('payBill', this.bill.id);
+            this.payClicked = true;
+        },
     },
 };
 

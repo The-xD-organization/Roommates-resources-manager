@@ -7,12 +7,16 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         isAuthenticated: false,
+
         loginStatus: null, // -1 error, 0 pending, 1 success
         errorMesage: null,
         getBillStatus: null,
+
         billsList: null,
         addNewBillStatus: null,
         categoriesList: [],
+        payBillStatus: null,
+
         tasksList: null,
         getTaskStatus: null,
         addNewTaskStatus: null,
@@ -37,6 +41,9 @@ export default new Vuex.Store({
             Object.keys(payload).forEach((key) => {
                 state.categoriesList[payload[key].id] = payload[key].name;
             });
+        },
+        setPayBIllStatus(state, payload) {
+            state.payBillStatus = payload;
         },
         setGetTaskStatus(state, payload) {
             state.getTaskStatus = payload;
@@ -114,6 +121,26 @@ export default new Vuex.Store({
                     commit('setErrorMessage', error);
                 });
         },
+        payBill({ commit }, id) {
+            commit('setPayBIllStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/bill/${id}`, {
+                is_payed: true,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setPayBIllStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setPayBIllStatus', -1);
+                });
+        },
+
         getTasks({ commit }) {
             commit('setGetTaskStatus', 0);
             axios.get(`${process.env.VUE_APP_API_URL}/tasks`, {
