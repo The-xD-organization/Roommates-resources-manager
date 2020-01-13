@@ -99,7 +99,6 @@ class MyTasks(Resource):
     @jwt_required()
     def get(self):
         """return json of every task
-            if my_tasks_only is True, returns only the tasks
             that currently logged user is assigned to"""
 
         user = UserModel.find_by_id(current_identity.id)
