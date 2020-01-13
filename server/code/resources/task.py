@@ -89,7 +89,23 @@ class Task(Resource):
 
 
 class TaskList(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('my_tasks_only',
+                        type=inputs.boolean,
+                        required=False,
+                        )
+
     @jwt_required()
     def get(self):
-        """return json of every task"""
+        """return json of every task
+            if my_tasks_only is True, returns only the tasks
+            that currently logged user is assigned to"""
+        data = TaskList.parser.parse_args()
+
+        if data['my_tasks_only']:
+            user = UserModel.find_by_id(current_identity.id)
+            user_id = user.id
+            if user_id is None:
+                return {'message': "This user is not assigned to any task."}, 400
+            return {'tasks': [task.json() for task in TaskModel.find_my_tasks(user_id)]}
         return {'tasks': [task.json() for task in TaskModel.find_all()]}

@@ -8,7 +8,7 @@ from datetime import timedelta
 
 from security import authenticate, identity
 from resources.user import UserRegister, User
-from resources.bill import Bill, BillList
+from resources.bill import Bill, BillList, LatestBill
 from resources.bill_category import BillCategory, BillCategoryList
 from resources.task import Task, TaskList
 
@@ -36,6 +36,7 @@ api.add_resource(BillCategory, '/bill_category/<string:name>')
 api.add_resource(Bill, '/bill', '/bill/<int:bill_id>')
 api.add_resource(BillList, '/bills')
 api.add_resource(BillCategoryList, '/bill_categories')
+api.add_resource(LatestBill, '/latest_bill')
 api.add_resource(Task, '/task', '/task/<int:task_id>')
 api.add_resource(TaskList, '/tasks')
 api.add_resource(UserRegister, '/register')
