@@ -3,16 +3,17 @@
         variant="info"
         class="my-2"
         border-variant="info"
+        bg-variant="danger"
         :class="{payed: bill.is_payed||payClicked}"
     >
         <h5>{{ $store.state.categoriesList[bill.category_id] }}</h5>
         <b-button
-            variant="btn"
+            variant="outline-dark"
             class="mt-1"
             v-show="!bill.is_payed"
             @click="payBill()"
         >
-           Zapłacony
+           Zapłać
         </b-button>
         <hr>
         <p v-show="bill.usage != 0">Zużycie: {{ bill.usage }}</p>
@@ -56,6 +57,6 @@ export default {
     cursor: pointer;
 }
 .payed{
-    background-color: red;
+    background-color:aquamarine!important;
 }
 </style>

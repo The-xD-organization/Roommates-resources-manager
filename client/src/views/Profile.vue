@@ -1,26 +1,32 @@
 <template>
     <default-layout>
-        Numer bankowy:
-        <b-form-input
-            class="my-2 form-style"
-            v-model="num"
-        ></b-form-input>
-         <b-button
-            class="my-2 add-bill-btn"
-            @click="sendProfileData()"
-            block
-        >
-            Wyślij
-        </b-button>
-        <b-spinner
-            v-if="$store.state.changeBankAccStatus === 0"
+        <b-container class="mt-2">
+            <b-card
             variant="info"
-            label="Spinning">
-        </b-spinner>
-        <p v-else-if="$store.state.changeBankAccStatus === 1">Wysłano</p>
-        <p v-else-if="$store.state.changeBankAccStatus === -1">
-            Wysyłanie nie powiodło się {{ $store.state.errorMesage }}
-        </p>
+            title="Numer bankowy:"
+            class="my-2"
+            border-variant="info">
+            <b-form-input
+                class="my-2 form-style"
+                v-model="num"
+            ></b-form-input>
+            <b-button
+                class="my-2 btn"
+                @click="sendProfileData()"
+            >
+                Wyślij
+            </b-button>
+            <b-spinner
+                v-if="$store.state.changeBankAccStatus === 0"
+                variant="info"
+                label="Spinning">
+            </b-spinner>
+            <p v-else-if="$store.state.changeBankAccStatus === 1">Wysłano</p>
+            <p v-else-if="$store.state.changeBankAccStatus === -1">
+                Wysyłanie nie powiodło się {{ $store.state.errorMesage }}
+            </p>
+            </b-card>
+        </b-container>
     </default-layout>
 </template>
 
@@ -61,4 +67,13 @@ export default {
 };
 </script>
 <style scoped>
+.btn{
+    background-color:white;
+    border-color: #17a2b8;
+    color:#17a2b8;
+}
+.btn:hover{
+    background-color: #17a2b8;
+    color:white;
+}
 </style>
