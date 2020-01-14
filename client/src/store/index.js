@@ -7,15 +7,27 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         isAuthenticated: false,
+
         loginStatus: null, // -1 error, 0 pending, 1 success
         errorMesage: null,
         getBillStatus: null,
+
         billsList: null,
         addNewBillStatus: null,
         categoriesList: [],
+        payBillStatus: null,
+
         tasksList: null,
         getTaskStatus: null,
         addNewTaskStatus: null,
+        doTaskStatus: null,
+
+        userData: null,
+        userDataStatus: null,
+        changeBankAccStatus: null,
+
+        homeBill: null,
+        homeTask: null,
     },
     mutations: {
         setLoginStatus(state, payload) {
@@ -38,6 +50,9 @@ export default new Vuex.Store({
                 state.categoriesList[payload[key].id] = payload[key].name;
             });
         },
+        setPayBIllStatus(state, payload) {
+            state.payBillStatus = payload;
+        },
         setGetTaskStatus(state, payload) {
             state.getTaskStatus = payload;
         },
@@ -46,6 +61,24 @@ export default new Vuex.Store({
         },
         setAddNewTaskStatus(state, payload) {
             state.addNewTaskStatus = payload;
+        },
+        setUserData(state, payload) {
+            state.userData = payload;
+        },
+        setUserDataStatus(state, payload) {
+            state.userDataStatus = payload;
+        },
+        setChangeBankAccStatus(state, payload) {
+            state.changeBankAccStatus = payload;
+        },
+        setHomeBill(state, payload) {
+            state.homeBill = payload;
+        },
+        setHomeTask(state, payload) {
+            state.homeTask = payload;
+        },
+        setDoTaskStatus(state, payload) {
+            state.doTaskStatus = payload;
         },
     },
     actions: {
@@ -114,6 +147,26 @@ export default new Vuex.Store({
                     commit('setErrorMessage', error);
                 });
         },
+        payBill({ commit }, id) {
+            commit('setPayBIllStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/bill/${id}`, {
+                is_payed: true,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setPayBIllStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setPayBIllStatus', -1);
+                });
+        },
+
         getTasks({ commit }) {
             commit('setGetTaskStatus', 0);
             axios.get(`${process.env.VUE_APP_API_URL}/tasks`, {
@@ -145,6 +198,107 @@ export default new Vuex.Store({
                 .catch((error) => {
                     commit('setErrorMessage', error);
                     commit('setAddNewTaskStatus', -1);
+                });
+        },
+
+        changeBankAcc({ commit }, newNumber) {
+            commit('setChangeBankAccStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/user`, {
+                bank_account: newNumber,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setChangeBankAccStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setChangeBankAccStatus', -1);
+                });
+        },
+        getUserData({ commit }) {
+            commit('setUserDataStatus', 0);
+            axios.get(`${process.env.VUE_APP_API_URL}/user`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    commit('setUserData', response.data);
+                    commit('setUserDataStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setUserDataStatus', -1);
+                });
+        },
+
+        getHomeBill({ commit }) {
+            commit('setGetBillStatus', 0);
+            axios.get(`${process.env.VUE_APP_API_URL}/latest_bill`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    commit('setHomeBill', response.data);
+                    commit('setGetBillStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setGetBillStatus', -1);
+                });
+        },
+        getHomeTask({ commit }) {
+            commit('setGetTaskStatus', 0);
+            axios.get(`${process.env.VUE_APP_API_URL}/my_tasks`, {
+                headers: { Authorization: `JWT ${Cookies.get('access_token')}` },
+            })
+                .then((response) => {
+                    commit('setHomeTask', response.data.tasks);
+                    commit('setGetTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setGetTaskStatus', -1);
+                });
+        },
+        doTask({ commit }, id) {
+            commit('setDoTaskStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/task/${id}`, {
+                is_done: true,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setDoTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setDoTaskStatus', -1);
+                });
+        },
+        asigneeToTask({ commit }, id, name) {
+            commit('setDoTaskStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/task/${id}`, {
+                assignee_name: name,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setDoTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setDoTaskStatus', -1);
                 });
         },
     },

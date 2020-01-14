@@ -32,20 +32,6 @@
                             to="/tasks">
                                 Obowiązki
                         </router-link></b-nav-item>
-                        <b-nav-item disabled>
-                        <router-link
-                            class="nav-link"
-                            to="/">
-                                Długi
-                        </router-link>
-                    </b-nav-item>
-                    <b-nav-item disabled>
-                        <router-link
-                            class="nav-link"
-                            to="/">
-                                Kalkulator
-                        </router-link>
-                    </b-nav-item>
                     <b-nav-item>
                         <router-link
                             class="nav-link"
@@ -61,12 +47,20 @@
                     <template v-slot:button-content>
                         <em>Konto</em>
                     </template>
-                    <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <b-dropdown-item><router-link
+                    <b-dropdown-item>
+                        <router-link
+                            class="link"
+                            to="/profile">
+                        Profil
+                        </router-link>
+                        </b-dropdown-item>
+                    <b-dropdown-item>
+                        <router-link
                             class="link"
                             to="/logout">
                                 Wyloguj
-                        </router-link></b-dropdown-item>
+                        </router-link>
+                    </b-dropdown-item>
                     </b-nav-item-dropdown>
                 </b-navbar-nav>
                 </b-collapse>
