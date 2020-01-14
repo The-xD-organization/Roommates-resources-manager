@@ -34,7 +34,7 @@ class Bill(Resource):
 
     @jwt_required()
     def get(self, bill_id):
-        """returns latest bill of given category"""
+        """returns bill with given id"""
         try:
             bill = BillModel.find_by_id(bill_id)
         except:
@@ -56,7 +56,7 @@ class Bill(Resource):
         #     if last_bill.date.day == datetime.today().day:
         #         return {'message': "Bill of given category with today's date already exists"}, 400
         user = UserModel.find_by_id(current_identity.id)
-        if data["payer_account"] != "":
+        if data["payer_account"] not in {"", None}:
             bill = BillModel(data['usage'],
                              data['cash'],
                              data['description'],
@@ -95,6 +95,20 @@ class Bill(Resource):
             bill.delete_from_db()
 
         return {'message': 'Bill deleted'}
+
+
+class LatestBill(Resource):
+    @jwt_required()
+    def get(self):
+        """returns latest bill"""
+        try:
+            bill = BillModel.find_latest_bill()
+        except:
+            return {"message": "An error occurred finding latest bill."}, 500  # Internal server error
+
+        if bill:
+            return bill.json()
+        return {'message': 'Bill not found'}, 404
 
 
 class BillList(Resource):

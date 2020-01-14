@@ -9,6 +9,8 @@ class UserModel(db.Model):
     password = db.Column(db.String(80))
     bank_account = db.Column(db.String(28), default="")     # PLNN NNNN ... NNNN
 
+    task = db.relationship('TaskModel', lazy='dynamic')
+
     def __init__(self, username, password, bank_account=""):
         self.username = username
         self.password = password

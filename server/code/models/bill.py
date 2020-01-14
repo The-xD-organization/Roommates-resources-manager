@@ -47,9 +47,9 @@ class BillModel(db.Model):
         return cls.query.all()
 
     @classmethod
-    def find_latest_bill(cls, category_id):
-        """returns latest bill of given category (with the most recent date) """
-        return cls.query.filter_by(category_id=category_id).order_by(cls.date.desc()).first()
+    def find_latest_bill(cls):
+        """returns latest bill """
+        return cls.query.order_by(cls.date.desc()).first()
 
     def save_to_db(self):
         """Inserts/update the item to the database"""
