@@ -23,7 +23,9 @@
             <span
             class="acc_number"
             :class="{payed: bill.is_payed||payClicked}">Numer konta</span>
-            <span v-if="showPayerAccount === true">: {{ bill.payer_account }}</span>
+             <span v-if="showPayerAccount === true">: {{ bill.payer_account }}
+                <span v-if="bill.payer_account == ''">Brak</span>
+            </span>
         </p>
     </b-card>
 </template>

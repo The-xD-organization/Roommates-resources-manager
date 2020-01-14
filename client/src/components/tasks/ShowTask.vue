@@ -5,7 +5,7 @@
         border-variant="info"
         :class="{done: task.is_done||doClicked}"
     >
-        <h5> {{ task.description }} </h5>
+        <h5>{{ task.description }}</h5>
         <hr>
         <p>Data utworzenia: {{ task.date_of_creation }}</p>
         <p v-if="task.assignee_name != null">Przypisana osoba: {{ task.assignee_name }} </p>

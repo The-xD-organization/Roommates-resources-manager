@@ -40,7 +40,7 @@ export default {
     data() {
         return {
             notPaid: true,
-            paid: true,
+            paid: false,
         };
     },
     mounted() {

@@ -1,6 +1,7 @@
 <template>
     <default-layout>
         <b-container class="mt-2">
+            <h2>Zmiana danych użytkownika: {{ $store.state.userData.username }}</h2>
             <b-card
             variant="info"
             title="Numer bankowy:"
