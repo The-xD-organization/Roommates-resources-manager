@@ -2,7 +2,6 @@
     <default-layout>
         <b-container fluid>
             <b-row class="p-2 justify-content-sm-center">
-                <h2>Witaj, {{ $store.state.userData.username }}!</h2>
                 <b-col cols="12" md="5" class="m-2">
                     <b-container>
                     <h3 class="text-center">Skróty</h3>
