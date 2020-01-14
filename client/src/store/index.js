@@ -282,6 +282,25 @@ export default new Vuex.Store({
                     commit('setDoTaskStatus', -1);
                 });
         },
+        asigneeToTask({ commit }, id, name) {
+            commit('setDoTaskStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/task/${id}`, {
+                assignee_name: name,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setDoTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setDoTaskStatus', -1);
+                });
+        },
     },
     modules: {
     },

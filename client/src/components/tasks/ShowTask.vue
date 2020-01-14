@@ -10,18 +10,22 @@
         <p>Data utworzenia: {{ task.date_of_creation }}</p>
         <p v-if="task.assignee_name != null">Przypisana osoba: {{ task.assignee_name }} </p>
         <b-button
-            v-else
+            v-else-if="asigneeClicked==false"
             variant="btn" class="m-1"
+            @click="asigneeToTask()"
         >
             Przypisz się
         </b-button>
         <b-button
-            v-if="task.is_done == false"
+            v-if="task.is_done == false
+                && task.assignee_name==$store.state.userData.username
+                && doClicked==false"
             variant="btn" class="m-1"
             @click="doTask()"
         >
             Zrobione
         </b-button>
+        <p v-if="asigneeClicked==true">Przypisałeś się!</p>
     </b-card>
 </template>
 
@@ -34,6 +38,7 @@ export default {
     data() {
         return {
             doClicked: false,
+            asigneeClicked: false,
         };
     },
     methods: {
@@ -41,6 +46,15 @@ export default {
             this.$store.dispatch('doTask', this.task.id);
             this.doClicked = true;
         },
+        asigneeToTask() {
+            this.$store.dispatch('asigneeToTask', this.task.id, this.task.assignee_name);
+            this.asigneeClicked = true;
+        },
+    },
+    mounted() {
+        if (this.$store.state.userData === null) {
+            this.$store.dispatch('getUserData');
+        }
     },
 };
 
