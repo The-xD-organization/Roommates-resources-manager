@@ -1,5 +1,10 @@
 <template>
-    <div>
+        <b-card
+        variant="info"
+        class="my-2"
+        border-variant="info"
+        :class="{done: task.is_done||doClicked}"
+    >
         <h5> {{ task.description }} </h5>
         <hr>
         <p>Data utworzenia: {{ task.date_of_creation }}</p>
@@ -13,10 +18,11 @@
         <b-button
             v-if="task.is_done == false"
             variant="btn" class="m-1"
+            @click="doTask()"
         >
             Zrobione
         </b-button>
-    </div>
+    </b-card>
 </template>
 
 <script>
@@ -24,6 +30,17 @@ export default {
     name: 'ShowTask',
     props: {
         task: Object,
+    },
+    data() {
+        return {
+            doClicked: false,
+        };
+    },
+    methods: {
+        doTask() {
+            this.$store.dispatch('doTask', this.task.id);
+            this.doClicked = true;
+        },
     },
 };
 
@@ -38,5 +55,8 @@ export default {
 .btn:hover{
     background-color: #17a2b8;
     color:white;
+}
+.done{
+    background-color:aquamarine!important;
 }
 </style>

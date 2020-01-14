@@ -20,6 +20,7 @@ export default new Vuex.Store({
         tasksList: null,
         getTaskStatus: null,
         addNewTaskStatus: null,
+        doTaskStatus: null,
 
         userData: null,
         userDataStatus: null,
@@ -75,6 +76,9 @@ export default new Vuex.Store({
         },
         setHomeTask(state, payload) {
             state.homeTask = payload;
+        },
+        setDoTaskStatus(state, payload) {
+            state.doTaskStatus = payload;
         },
     },
     actions: {
@@ -257,6 +261,25 @@ export default new Vuex.Store({
                 .catch((error) => {
                     commit('setErrorMessage', error);
                     commit('setGetTaskStatus', -1);
+                });
+        },
+        doTask({ commit }, id) {
+            commit('setDoTaskStatus', 0);
+            axios.put(`${process.env.VUE_APP_API_URL}/task/${id}`, {
+                is_done: true,
+            },
+            {
+                headers: {
+                    Authorization: `JWT ${Cookies.get('access_token')}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then(() => {
+                    commit('setDoTaskStatus', 1);
+                })
+                .catch((error) => {
+                    commit('setErrorMessage', error);
+                    commit('setDoTaskStatus', -1);
                 });
         },
     },
