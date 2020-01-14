@@ -21,8 +21,7 @@
                             <b-row class="m-3 justify-content-sm-center">
                                 <b-col cols="12" md="5" class="m-2">
                                     <b-card
-                                    title="Dashboard"
-                                    sub-title="(work in progress)">
+                                    title="Dashboard">
                                     <div>
                                     <b-img
                                     src="https://image.flaticon.com/icons/png/512/1508/1508776.png"
@@ -49,8 +48,7 @@
                                 </b-col>
                                 <b-col cols="12" md="5" class="m-2">
                                     <b-card
-                                    title="Obowiązki"
-                                    sub-title="(work in progress)">
+                                    title="Obowiązki">
                                      <div>
                                     <b-img
                                     src="https://image.flaticon.com/icons/png/512/839/839860.png"
@@ -58,33 +56,6 @@
                                     </div>
                                     <p>Współlokatorzy będą mogli w prosty sposób dzielić się
                                         obowiązkami.
-                                    </p>
-                                    </b-card>
-                                </b-col>
-                                <b-col cols="12" md="5" class="m-2">
-                                    <b-card
-                                    title="Długi"
-                                    sub-title="(work in progress)">
-                                     <div>
-                                    <b-img
-                                    src="https://image.flaticon.com/icons/png/512/1547/1547315.png"
-                                    class="utility_img" alt="Responsive image"></b-img>
-                                    </div>
-                                    <p>Funkcjonalność "Długi" ułatwi rozliczanie się między
-                                        współlokatorami.</p>
-                                    </b-card>
-                                </b-col>
-                                <b-col cols="12" md="5" class="m-2">
-                                    <b-card
-                                    title="Kalkulator zużycia"
-                                    sub-title="(work in progress)"  >
-                                     <div>
-                                    <b-img
-                                    src="https://image.flaticon.com/icons/png/512/710/710088.png"
-                                    class="utility_img" alt="Responsive image"></b-img>
-                                    </div>
-                                    <p>Kalkulator zużycia pozwoli obliczyć cenę za media na
-                                        podstawie zużycia odczytanego z liczników.
                                     </p>
                                     </b-card>
                                 </b-col>

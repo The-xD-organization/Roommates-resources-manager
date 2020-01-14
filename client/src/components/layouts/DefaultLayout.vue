@@ -32,20 +32,6 @@
                             to="/tasks">
                                 Obowiązki
                         </router-link></b-nav-item>
-                        <b-nav-item disabled>
-                        <router-link
-                            class="nav-link"
-                            to="/">
-                                Długi
-                        </router-link>
-                    </b-nav-item>
-                    <b-nav-item disabled>
-                        <router-link
-                            class="nav-link"
-                            to="/">
-                                Kalkulator
-                        </router-link>
-                    </b-nav-item>
                     <b-nav-item>
                         <router-link
                             class="nav-link"

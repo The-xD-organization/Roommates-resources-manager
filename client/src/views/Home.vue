@@ -1,45 +1,77 @@
 <template>
     <default-layout>
-        <b-container class="my-2">
-            <b-container>
-                <h3 class="py-2">Ostatni rachunek</h3>
-             <b-card
-            variant="info"
-            class="my-2"
-            border-variant="info"
-        >
-        <h5>{{ $store.state.categoriesList[$store.state.homeBill.category_id] }}</h5>
-        <hr>
-        <p v-show="$store.state.homeBill.usage != 0">
-            Zużycie: {{ $store.state.homeBill.usage }}</p>
-        <p v-show="$store.state.homeBill.cash != 0">
-            Koszt: {{ $store.state.homeBill.cash }} zł</p>
-        <p>Data: {{ $store.state.homeBill.date }}</p>
-        <p v-show="$store.state.homeBill.description!=''">
-            Opis: {{ $store.state.homeBill.description }}</p>
-        </b-card>
-            <router-link to="/bills">
-                Przejdź do rachunków
-            </router-link>
-            </b-container>
-        <b-container class="mb-4">
-            <h3 class="py-2">Twoje obowiązki</h3>
-            <div>
-        <b-card
-            variant="info"
-            class="my-2"
-            border-variant="info"
-            v-for="task in $store.state.homeTask" :key = task.id
-        >
-            <ShowTask
-                v-bind:task="task"
-            />
-        </b-card>
-    </div>
-             <router-link to="/tasks">
-                Przejdź do obowiązków
-            </router-link>
-        </b-container>
+            <b-container fluid>
+            <b-row class="p-2 justify-content-sm-center">
+                <b-col cols="12" md="5" class="m-2">
+                    <b-container>
+                    <h3 class="text-center">Skróty</h3>
+                    <b-card-group columns class=" text-center">
+                    <b-card
+                    class="my-2"
+                    variant="info"
+                    border-variant="info">
+                    <router-link to="/profile">
+                    <b-img
+                        src="https://image.flaticon.com/icons/png/512/149/149452.png"
+                    class="utility_img" alt="Responsive image"></b-img>
+                        <p>Profil</p>
+                    </router-link>
+                    </b-card>
+                    <b-card
+                    class="my-2"
+                    variant="info"
+                    border-variant="info">
+                    <router-link to="/bills">
+                    <b-img
+                    src="https://image.flaticon.com/icons/png/512/313/313434.png"
+                    class="utility_img" alt="Responsive image"></b-img>
+                        <p>Rachunki</p>
+                    </router-link>
+                    </b-card>
+                    <b-card
+                    class="my-2"
+                    variant="info"
+                    border-variant="info">
+                    <router-link to="/tasks">
+                    <b-img
+                        src="https://image.flaticon.com/icons/png/512/839/839860.png"
+                    class="utility_img" alt="Responsive image"></b-img>
+                        <p>Obowiązki</p>
+                    </router-link>
+                    </b-card>
+                    </b-card-group>
+                    <h3 class="text-center">Ostatni rachunek</h3>
+                    <b-card
+                    variant="info"
+                    border-variant="info">
+                    <div class="text-center">
+                    </div>
+                    <h5>{{ $store.state.categoriesList[$store.state.homeBill.category_id] }}</h5>
+                    <hr>
+                    <p v-show="$store.state.homeBill.usage != 0">
+                        Zużycie: {{ $store.state.homeBill.usage }}</p>
+                    <p v-show="$store.state.homeBill.cash != 0">
+                        Koszt: {{ $store.state.homeBill.cash }} zł</p>
+                    <p>Data: {{ $store.state.homeBill.date }}</p>
+                    <p v-show="$store.state.homeBill.description!=''">
+                        Opis: {{ $store.state.homeBill.description }}</p>
+                    </b-card>
+                    </b-container>
+                </b-col>
+                <b-col cols="12" md="5" class="m-2">
+                    <b-container>
+                        <h3 class="text-center">Twoje obowiązki</h3>
+                    <div class="text-center">
+                    </div>
+                    <div
+                    v-for="task in $store.state.homeTask" :key = task.id>
+                    <ShowTask
+                        v-bind:task="task"
+                    />
+                    </div>
+                    </b-container>
+                </b-col>
+            </b-row>
         </b-container>
     </default-layout>
 </template>
@@ -67,3 +99,9 @@ export default {
     },
 };
 </script>
+<style scoped>
+.utility_img{
+    max-height: 128px;
+    max-width: 128px;
+}
+</style>

@@ -71,6 +71,7 @@ export default {
     color:white;
 }
 .done{
-    background-color:aquamarine!important;
+    border-color: gray!important;
+    color: gray;
 }
 </style>
